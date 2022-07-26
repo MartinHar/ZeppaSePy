@@ -43,7 +43,7 @@ LO_email = 'loii@sef.am'
 LO_password = 'Password1'
 LGL_email = 'testlo@sef.am'
 LGL_password = 'Password2'
-email_of_store = 'selenium@python.py'
+email_of_store = 'partner_selenium.py@python.py'
 url_of_store = 'https://www.selenium.dev/documentation/'
 born_date_of_store = '01-01-1991'
 social_card_issue_date = '01-01-2010'
@@ -54,6 +54,7 @@ PE_issue_day = '01-01-2000'
 
 class addPotentialPartner:
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+    driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LO_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
@@ -100,6 +101,7 @@ class addPotentialPartner:
 
 class filteringPotentialPartner:
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+    driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LGL_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
@@ -132,6 +134,7 @@ class filteringPotentialPartner:
 
 class add_chain:
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+    driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LO_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
@@ -213,5 +216,5 @@ class add_chain:
     sameCheckbox.click()
     attachZIP = driver.find_element(By.XPATH, "//input[@type='file']")
     attachZIP.send_keys(main_file)
-    saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
-    saveBTN.click()
+    # saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
+    # saveBTN.click()
