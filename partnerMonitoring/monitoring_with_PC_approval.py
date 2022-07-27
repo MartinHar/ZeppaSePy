@@ -147,3 +147,4 @@ class PCCycle:
     general_page = driver.find_element(By.XPATH, "//div[contains(text(),'Ընդհանուր')]")
     general_page.click()
     as_codes()
+    
