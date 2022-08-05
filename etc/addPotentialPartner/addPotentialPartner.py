@@ -7,8 +7,6 @@ import random
 
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
-
 driver.implicitly_wait(10)
 
 

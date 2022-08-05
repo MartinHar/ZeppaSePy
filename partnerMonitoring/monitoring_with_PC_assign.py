@@ -1,17 +1,15 @@
 import time
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
-# from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support import expected_conditions as EC
 import random
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
-
 driver.implicitly_wait(10)
 
 
@@ -60,7 +58,7 @@ maxLoanAmount = '10000000'
 additionalInfo = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, Լոռեմ իպսում դոլոր սիթ ամետ'
 
 
-class LOCycle:
+class LO_cycle:
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -100,7 +98,7 @@ class LOCycle:
     save_btn.click()
 
 
-class BMCycle:
+class BM_cycle:
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -121,9 +119,10 @@ class BMCycle:
 
     BM_Sales_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՄՃ/Վաճառք հաստատում')]")
     BM_Sales_btn.click()
+    time.sleep(2)
 
 
-class PCCycle:
+class PC_assign:
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -141,11 +140,66 @@ class PCCycle:
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
+    assign_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Հանձնարարել')]")
+    assign_btn.click()
+    time.sleep(1)
+    adm = driver.find_element(By.XPATH, "//div[@class='ant-select-selector']")
+    adm.click()
+    time.sleep(1)
+    s_admin = driver.find_element(By.XPATH, "//div[contains(@title,'LOIII - լօօի լօիիյ')]//div[1]")
+    s_admin.click()
+    assign_comment = driver.find_element(By.XPATH, "//div[@class='ant-modal-body']//textarea[@class='ant-input']")
+    assign_comment.send_keys(additionalInfo)
+    assign_btn = driver.find_element(By.XPATH, "//div[@class='ant-modal-footer']//span[contains(text(),'Հանձնարարել')]")
+    assign_btn.click()
+    time.sleep(2)
+
+
+class LO_approval:
+
+    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+    driver.maximize_window()
+    login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
+    login_email.send_keys(LO_email)
+    login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
+    login_password.send_keys(LO_password)
+    login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
+    login_button.click()
+
+    partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
+    partners_tab.click()
+    Partner = driver.find_element(
+        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner.click()
+    monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
+    monitoring_page.click()
+    execute_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Կատարել')]")
+    execute_btn.click()
+    time.sleep(2)
+
+
+class PC_approval:
+    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+    driver.maximize_window()
+    login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
+    login_email.send_keys(PC_email)
+    login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
+    login_password.send_keys(PC_password)
+    login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
+    login_button.click()
+
+    partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
+    partners_tab.click()
+    Partner = driver.find_element(
+        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner.click()
+    monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
+    monitoring_page.click()
     PC_approve_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՀՊ հաստատում')]")
     PC_approve_btn.click()
     time.sleep(2)
-    # WebDriverWait(driver, 5)          not woriking in this case
     general_page = driver.find_element(By.XPATH, "//div[contains(text(),'Ընդհանուր')]")
     general_page.click()
+    driver.refresh()
+    time.sleep(2)
     as_codes()
-    

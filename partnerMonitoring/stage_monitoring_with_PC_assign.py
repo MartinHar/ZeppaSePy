@@ -1,12 +1,9 @@
 import time
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
-# from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-# from selenium.webdriver.support import expected_conditions as EC
 import random
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -44,11 +41,11 @@ def as_codes():
 
 
 store_number = '1'
-BM_email = 'mj11@sef.am'
+BM_email = 'bm24@sef.am'
 BM_password = 'Password1'
-PC_email = 'pcpc@sef.am'
+PC_email = 'pc_auto@sef.am'
 PC_password = 'Password1'
-LO_email = 'loii@sef.am'
+LO_email = 'lo24@sef.am'
 LO_password = 'Password1'
 
 threeMonthsCashMoneyCirculation = '5000000'
@@ -60,8 +57,8 @@ maxLoanAmount = '10000000'
 additionalInfo = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, Լոռեմ իպսում դոլոր սիթ ամետ'
 
 
-class LOCycle:
-    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+class LO_cycle:
+    driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LO_email)
@@ -98,10 +95,11 @@ class LOCycle:
     additional_Info.send_keys(additionalInfo)
     save_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Պահպանել')]")
     save_btn.click()
+    time.sleep(2)
 
 
-class BMCycle:
-    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+class BM_cycle:
+    driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(BM_email)
@@ -121,10 +119,11 @@ class BMCycle:
 
     BM_Sales_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՄՃ/Վաճառք հաստատում')]")
     BM_Sales_btn.click()
+    time.sleep(2)
 
 
-class PCCycle:
-    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
+class PC_assign:
+    driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(PC_email)
@@ -141,11 +140,90 @@ class PCCycle:
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
+    assign_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Հանձնարարել')]")
+    assign_btn.click()
+    time.sleep(1)
+    adm = driver.find_element(By.XPATH, "//div[@class='ant-select-selector']")
+    adm.click()
+    time.sleep(1)
+    s_admin = driver.find_element(By.XPATH, "//div[contains(@title,'YYLO - Վմադմին Վմադմին')]//div[1]")
+    s_admin.click()
+    assign_comment = driver.find_element(By.XPATH, "//div[@class='ant-modal-body']//textarea[@class='ant-input']")
+    assign_comment.send_keys(additionalInfo)
+    assign_btn = driver.find_element(By.XPATH, "//div[@class='ant-modal-footer']//span[contains(text(),'Հանձնարարել')]")
+    assign_btn.click()
+    time.sleep(2)
+
+
+class LO_approval:
+
+    driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
+    driver.maximize_window()
+    login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
+    login_email.send_keys(LO_email)
+    login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
+    login_password.send_keys(LO_password)
+    login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
+    login_button.click()
+
+    partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
+    partners_tab.click()
+    Partner = driver.find_element(
+        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner.click()
+    monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
+    monitoring_page.click()
+    execute_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Կատարել')]")
+    execute_btn.click()
+    time.sleep(2)
+
+
+class BM_cycle_2:
+    driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
+    driver.maximize_window()
+    login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
+    login_email.send_keys(BM_email)
+    login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
+    login_password.send_keys(BM_password)
+    login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
+    login_button.click()
+
+    partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
+    partners_tab.click()
+    Partner = driver.find_element(
+        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner.click()
+
+    monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
+    monitoring_page.click()
+
+    BM_Sales_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՄՃ/Վաճառք հաստատում')]")
+    BM_Sales_btn.click()
+    time.sleep(2)
+
+
+class PC_approval:
+    driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
+    driver.maximize_window()
+    login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
+    login_email.send_keys(PC_email)
+    login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
+    login_password.send_keys(PC_password)
+    login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
+    login_button.click()
+
+    partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
+    partners_tab.click()
+    Partner = driver.find_element(
+        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner.click()
+    monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
+    monitoring_page.click()
     PC_approve_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՀՊ հաստատում')]")
     PC_approve_btn.click()
     time.sleep(2)
-    # WebDriverWait(driver, 5)          not woriking in this case
     general_page = driver.find_element(By.XPATH, "//div[contains(text(),'Ընդհանուր')]")
     general_page.click()
+    driver.refresh()
+    time.sleep(2)
     as_codes()
-    
