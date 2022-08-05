@@ -40,6 +40,20 @@ def as_codes():
         print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
 
 
+# NEED TO BE IMPROVED
+def green_banner(banner_xpath):
+    driver.implicitly_wait(2)
+    try:
+        green_banner_ = driver.find_element(By.XPATH, banner_xpath).text
+        check = str(green_banner_) == 'Այս տվյալներով առկա է գործընկեր'
+        if check is True:
+            print('Green validation message is present, and text is: ' + str(check))
+        else:
+            print('WARNING: Green validation message text is incorrect')
+    except NoSuchElementException:
+        print('WARNING: No green validation message is detected on: ' + str(banner_xpath))
+
+
 PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 SUPM_email = 'supm@sef.am'
@@ -95,8 +109,7 @@ def phone_number_case():
     phoneNumber_main = driver.find_element(By.XPATH, '//input[@type="number"]')
     phoneNumber_main.send_keys(Keys.COMMAND + 'a')
     phoneNumber_main.send_keys(Keys.BACKSPACE)
-    # phoneNumber_main.send_keys(phoneNumber_link)
-    phoneNumber_main.send_keys('56424675')
+    phoneNumber_main.send_keys(phoneNumber_link)
     save_btn = driver.find_element(By.XPATH, "//button[@class='ant-btn ant-btn-primary unblock_button']")
     save_btn.click()
     time.sleep(1)
@@ -112,4 +125,51 @@ def phone_number_case():
         print('WARNING: No banner detected')
 
 
-phone_number_case()
+def linking_other_fields():
+    # BRAND NAME
+    brandName_main = driver.find_element(By.XPATH, "//input[@name='brandName']")
+    brandName_main.clear()
+    brandName_main.send_keys(brandName_link)
+    # TAX CODE
+    taxCode_main = driver.find_element(By.XPATH, "//input[@name='taxCode']")
+    taxCode_main.clear()
+    taxCode_main.send_keys(taxCode_link)
+    # AMD ACCOUNT NUMB.
+    bankAccountAMD_main = driver.find_element(By.XPATH, "//input[@name='bankAccount']")
+    bankAccountAMD_main.clear()
+    bankAccountAMD_main.send_keys(bankAccountAMD_link)
+    # USD ACCOUNT NUMB.
+    bankAccountUSD_main = driver.find_element(By.XPATH, "//input[@name='bankAccountUsd']")
+    bankAccountUSD_main.clear()
+    bankAccountUSD_main.send_keys(bankAccountUSD_link)
+    # SOCIAL CARD NUMB.
+    socialCard_main = driver.find_element(By.XPATH, "//input[@name='socialCard']")
+    socialCard_main.clear()
+    socialCard_main.send_keys(socialCard_link)
+    # PASSPORT ID
+    passportId_main = driver.find_element(By.XPATH, "//input[@name='passportId']")
+    passportId_main.clear()
+    passportId_main.send_keys(passportId_link)
+    # SUBMIT BUTTON
+    submit_btn = driver.find_element(By.XPATH, "//button[@type='submit']")
+    submit_btn.click()
+    time.sleep(1)
+    # LINK BUTTON
+    try:
+        driver.implicitly_wait(2)
+        link_btn = driver.find_element(By.XPATH, "//div[@class='ant-modal-footer']//button[@type='submit']")
+        link_btn.click()
+    except:
+        print('WARNING: Փոխկապակցել popup is not located\n')
+
+    # CHECK FOR GREEN VALIDATION UNDER FIELDS
+    green_banner(str("(//div[@role='alert'])[1]"))
+    green_banner(str("(//div[@role='alert'])[2]"))
+    green_banner(str("(//div[@role='alert'])[3]"))
+    green_banner(str("(//div[@role='alert'])[4]"))
+    green_banner(str("(//div[@role='alert'])[5]"))
+    green_banner(str("(//div[@role='alert'])[6]"))
+
+
+# phone_number_case()
+linking_other_fields()
