@@ -58,7 +58,7 @@ maxLoanAmount = '10000000'
 additionalInfo = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, Լոռեմ իպսում դոլոր սիթ ամետ'
 
 
-class LO_cycle:
+def lo_cycle():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -98,7 +98,7 @@ class LO_cycle:
     save_btn.click()
 
 
-class BM_cycle:
+def bm_cycle():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -122,7 +122,7 @@ class BM_cycle:
     time.sleep(2)
 
 
-class PC_assign:
+def pc_assign():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -155,7 +155,7 @@ class PC_assign:
     time.sleep(2)
 
 
-class LO_approval:
+def lo_approval():
 
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
@@ -178,7 +178,7 @@ class LO_approval:
     time.sleep(2)
 
 
-class PC_approval:
+def pc_approval():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -203,3 +203,10 @@ class PC_approval:
     driver.refresh()
     time.sleep(2)
     as_codes()
+
+
+lo_cycle()
+bm_cycle()
+pc_assign()
+lo_approval()
+pc_approval()
