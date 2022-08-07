@@ -5,39 +5,9 @@ from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-import random
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
 driver.implicitly_wait(10)
-
-
-def generate_random_arm_word(make_arm_word, n):
-    return ''.join(random.choices(make_arm_word, k=n))
-
-
-make_eng_word = 'abcdefg'
-
-
-def generate_random_eng_word(make_eng_word, n):
-    return ''.join(random.choices(make_eng_word, k=n))
-
-
-make_rand_number = '0123456789'
-
-
-def generate_random_number(make_rand_number, n):
-    return ''.join(random.choices(make_rand_number, k=n))
-
-
-def as_codes():
-    driver.implicitly_wait(2)
-    try:
-        driver.find_element(By.CSS_SELECTOR, '[name="asCliCode"]') and \
-        driver.find_element(By.CSS_SELECTOR, '[name="asAccountNumber"]')
-        print('ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are present')
-    except NoSuchElementException:
-        print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
 
 
 # NEED TO BE IMPROVED
@@ -54,12 +24,20 @@ def green_banner(banner_xpath):
         print('WARNING: No green validation message is detected on: ' + str(banner_xpath))
 
 
+def check_field_empty_or_not(element):
+    if len(element) == 0:
+        # print(f'{field} field is empty')
+        print('Warning! field is empty')
+    else:
+        print(element)
+
+
 PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 SUPM_email = 'supm@sef.am'
 SUPM_password = 'Password3'
-store_number_link = '5'
-store_number = '4'
+store_number_link = '2'
+store_number = '1'
 
 driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
 driver.maximize_window()
@@ -78,30 +56,38 @@ Partner = driver.find_element(
     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number_link}]")
 Partner.click()
 
-# print(Partner.split()[2])
 # if we get_attribute from variable , it will not work correctly.
-
+# COLLECTING INFORMATION
 # Phone number          (must not be linked if there is a store with this phone number)
 phoneNumber_link = driver.find_element(
     By.XPATH, "//label[contains(text(),'Հեռախոսահամար')]/..//input[@type='number']").get_attribute("value")
+check_field_empty_or_not(phoneNumber_link)
 # BRAND NAME
 brandName_link = driver.find_element(By.XPATH, "//input[@name='brandName']").get_attribute("value")
+check_field_empty_or_not(brandName_link)
 # TAX CODE
 taxCode_link = driver.find_element(By.XPATH, "//input[@name='taxCode']").get_attribute("value")
+check_field_empty_or_not(taxCode_link)
 # AMD ACCOUNT NUMB.
 bankAccountAMD_link = driver.find_element(By.XPATH, "//input[@name='bankAccount']").get_attribute("value")
+check_field_empty_or_not(bankAccountAMD_link)
 # USD ACCOUNT NUMB.
 bankAccountUSD_link = driver.find_element(By.XPATH, "//input[@name='bankAccountUsd']").get_attribute("value")
+check_field_empty_or_not(bankAccountUSD_link)
 # SOCIAL CARD NUMB.
 socialCard_link = driver.find_element(By.XPATH, "//input[@name='socialCard']").get_attribute("value")
+check_field_empty_or_not(socialCard_link)
 # PASSPORT ID
 passportId_link = driver.find_element(By.XPATH, "//input[@name='passportId']").get_attribute("value")
+check_field_empty_or_not(passportId_link)
 
 partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
 partners_tab.click()
 Partner = driver.find_element(
     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
 Partner.click()
+asCliCode = driver.find_element(By.XPATH, "//input[@name='asCliCode']").get_attribute("value")
+asAccountNumber = driver.find_element(By.XPATH, "//input[@name='asAccountNumber']").get_attribute("value")
 
 
 def phone_number_case():
@@ -116,13 +102,16 @@ def phone_number_case():
     try:
         error_banner = driver.find_element(By.XPATH, "//div[@class='ant-message-notice-content']").text
         check = str(error_banner) == \
-                'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա է գործընկերոջ հաշիվ'
+                'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ ' \
+                'Տվյալ հեռախոսահամարով արդեն առկա են հաճախորդի և գործընկերոջ հաշիվներ։' \
+                or str(error_banner) == 'Դուք չեք կարող ' \
+                'օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա են հաճախորդի և գործընկերոջ հաշիվներ։'
         if check is True:
-            print('Banner validation message is: ' + str(check))
+            print('Phone number exist, banner validation message is: ' + str(check))
         else:
-            print('WARNING: Banner text is incorrect')
+            print('WARNING! Banner text is incorrect')
     except NoSuchElementException:
-        print('WARNING: No banner detected')
+        print('WARNING! No banner detected')
 
 
 def linking_other_fields():
@@ -161,7 +150,11 @@ def linking_other_fields():
         link_btn.click()
     except:
         print('WARNING: Փոխկապակցել popup is not located\n')
-
+    # CHECK STORE IS ACTIVATED OR NOT
+    if len(asCliCode) == 0 and len(asAccountNumber) == 0:
+        print('Warning! Store is not activated, try another store')
+    else:
+        print('Store is activated')
     # CHECK FOR GREEN VALIDATION UNDER FIELDS
     green_banner(str("(//div[@role='alert'])[1]"))
     green_banner(str("(//div[@role='alert'])[2]"))
@@ -171,5 +164,10 @@ def linking_other_fields():
     green_banner(str("(//div[@role='alert'])[6]"))
 
 
-# phone_number_case()
-linking_other_fields()
+def main():
+    # phone_number_case()
+    linking_other_fields()
+
+
+if __name__ == '__main__':
+    main()

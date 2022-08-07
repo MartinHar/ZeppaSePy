@@ -43,7 +43,7 @@ store_number = '1'
 LO_email = 'loii@sef.am'
 LO_password = 'Password1'
 LGL_email = 'testlo@sef.am'
-LGL_password = 'Password2'
+LGL_password = 'Password3'
 email_of_store = 'partner_selenium.py@python.py'
 url_of_store = 'https://www.selenium.dev/documentation/'
 born_date_of_store = '01-01-1991'
@@ -222,6 +222,12 @@ def add_chain():
     # saveBTN.click()
 
 
-add_potential_partner()
-filtering_potential_partner()
-add_chain()
+def main():
+    # add_potential_partner()
+    filtering_potential_partner()
+    add_chain()
+
+
+if __name__ == '__main__':
+    main()
+
