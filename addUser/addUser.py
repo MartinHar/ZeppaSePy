@@ -74,9 +74,9 @@ def user_verification():
     user_street_adr = generate_random_arm_word(make_arm_word, 3) + '1 / -'
     user_house_num = generate_random_arm_word(make_arm_word, 3) + '1/-'
     user_apt_num = generate_random_arm_word(make_arm_word, 3) + '1/-'
-    main_file = path.abspath(path.join(path.dirname(__file__), 'mainFile.zip'))
+    # main_file = path.abspath(path.join(path.dirname(__file__), 'mainFile.zip'))           #need to be automated ...
     LO_email = 'loii@sef.am'
-    LO_password = 'Password1'
+    LO_password = 'Password2'
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.implicitly_wait(10)
@@ -153,11 +153,12 @@ def user_verification():
     time.sleep(1)
     next_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Հաջորդ')]")
     next_btn.click()
+    time.sleep(2000)
 
 
 def main():
-    add_user_from_swagger()
-    # user_verification()
+    # add_user_from_swagger()
+    user_verification()
 
 
 if __name__ == '__main__':
