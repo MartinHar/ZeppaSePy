@@ -64,10 +64,7 @@ def add_user_from_swagger():
     print(reg_user.content)
 
 
-add_user_from_swagger()
-
-
-class user_verification:
+def user_verification():
     born_date_of_user = '01-01-1999'
     social_card_issue_date = '01-01-2019'
     passport_issue_date = '01-12-2020'
@@ -156,3 +153,12 @@ class user_verification:
     time.sleep(1)
     next_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Հաջորդ')]")
     next_btn.click()
+
+
+def main():
+    add_user_from_swagger()
+    # user_verification()
+
+
+if __name__ == '__main__':
+    main()
