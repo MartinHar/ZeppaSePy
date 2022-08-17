@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import random
 
+store_number = input('Enter stores location number from partners list: ')
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 
@@ -40,7 +41,6 @@ def as_codes():
         print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
 
 
-store_number = input('Enter stores location number from partners list: ')
 LO_email = 'automation_lo24@sef.am'
 LO_password = 'Password5'
 BM_email = 'automation_bm24@sef.am'
@@ -79,9 +79,9 @@ def lo_cycle():
     check_Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]')\
         .get_attribute("value")
     if len(check_Money_Circulation) != 0:
-        print("Warning: monitoring information is already filled")
         time.sleep(5)
         driver.quit()
+        print("Warning: monitoring information is already fillezd")
     Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]')
     Money_Circulation.send_keys(threeMonthsCashMoneyCirculation)
     Money_Circulation_nonCash = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsNonCashMoneyCirculation"]')
