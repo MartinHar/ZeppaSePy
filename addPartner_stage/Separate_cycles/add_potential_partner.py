@@ -25,11 +25,11 @@ def generate_random_arm_word(make_arm_word, n):
 
 
 url = 'http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login'
-LO_email = 'lo24@sef.am'
-LO_password = 'Password1'
+LO_email = 'automation_lo24@sef.am'
+LO_password = 'Password5'
 
 
-class addPotentialPartner:
+def add_potential_partner():
     driver.maximize_window()
     driver.get(url)
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -74,3 +74,11 @@ class addPotentialPartner:
     address_apartment.send_keys(generate_random_number(make_rand_number, 3))
     save_btn = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     # save_btn.click()
+
+
+def main():
+    add_potential_partner()
+
+
+if __name__ == '__main__':
+    main()
