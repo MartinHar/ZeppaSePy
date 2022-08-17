@@ -13,12 +13,12 @@ jpg = path.abspath(path.join(path.dirname(__file__), '1.jpg'))
 pdf = path.abspath(path.join(path.dirname(__file__), '2.pdf'))
 png = path.abspath(path.join(path.dirname(__file__), '3.png'))
 url = 'http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login'
-LGL_email = 'testlgl@sef.am'
-LGL_password = 'Password3'
+LGL_email = 'automation_lgl@sef.am'
+LGL_password = 'Password5'
 comment_for = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, Լոռեմ իպսում դոլոր սիթ ամետ'
 
 
-class filteringPotentialPartner:
+def filtering_potential_partner():
     driver.get(url)
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -49,3 +49,11 @@ class filteringPotentialPartner:
     uploadFile_4.send_keys(jpg)
     save_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     # save_button.click()
+
+
+def main():
+    filtering_potential_partner()
+
+
+if __name__ == '__main__':
+    main()
