@@ -75,6 +75,13 @@ def lo_cycle():
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
+
+    check_Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]')\
+        .get_attribute("value")
+    if len(check_Money_Circulation) != 0:
+        print("Warning: monitoring information is already filled")
+        time.sleep(5)
+        driver.quit()
     Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]')
     Money_Circulation.send_keys(threeMonthsCashMoneyCirculation)
     Money_Circulation_nonCash = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsNonCashMoneyCirculation"]')
