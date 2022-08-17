@@ -40,7 +40,7 @@ def as_codes():
         print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
 
 
-store_number = '1'
+store_number = input('Enter stores location number from partners list: ')
 LO_email = 'automation_lo24@sef.am'
 LO_password = 'Password5'
 BM_email = 'automation_bm24@sef.am'
@@ -230,8 +230,8 @@ def pc_approval():
 
 
 def main():
-    # lo_cycle()
-    # bm_cycle()
+    lo_cycle()
+    bm_cycle()
     pc_assign()
     lo_approval()
     bm_cycle_2()
