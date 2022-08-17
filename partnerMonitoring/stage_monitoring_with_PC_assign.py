@@ -57,7 +57,7 @@ maxLoanAmount = '10000000'
 additionalInfo = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, Լոռեմ իպսում դոլոր սիթ ամետ'
 
 
-class LO_cycle:
+def lo_cycle():
     driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -98,7 +98,7 @@ class LO_cycle:
     time.sleep(2)
 
 
-class BM_cycle:
+def bm_cycle():
     driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -122,7 +122,7 @@ class BM_cycle:
     time.sleep(2)
 
 
-class PC_assign:
+def pc_assign():
     driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -146,7 +146,7 @@ class PC_assign:
     adm = driver.find_element(By.XPATH, "//div[@class='ant-select-selector']")
     adm.click()
     time.sleep(1)
-    s_admin = driver.find_element(By.XPATH, "//div[contains(@title,'YYLO - Վմադմին Վմադմին')]//div[1]")
+    s_admin = driver.find_element(By.XPATH, "//div[@title='autLO - Լօ Լօ']")
     s_admin.click()
     assign_comment = driver.find_element(By.XPATH, "//div[@class='ant-modal-body']//textarea[@class='ant-input']")
     assign_comment.send_keys(additionalInfo)
@@ -155,7 +155,7 @@ class PC_assign:
     time.sleep(2)
 
 
-class LO_approval:
+def lo_approval():
 
     driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
@@ -178,7 +178,7 @@ class LO_approval:
     time.sleep(2)
 
 
-class BM_cycle_2:
+def bm_cycle_2():
     driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -202,7 +202,7 @@ class BM_cycle_2:
     time.sleep(2)
 
 
-class PC_approval:
+def pc_approval():
     driver.get('http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login')
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -227,3 +227,16 @@ class PC_approval:
     driver.refresh()
     time.sleep(2)
     as_codes()
+
+
+def main():
+    # lo_cycle()
+    # bm_cycle()
+    pc_assign()
+    lo_approval()
+    bm_cycle_2()
+    pc_approval()
+
+
+if __name__ == '__main__':
+    main()
