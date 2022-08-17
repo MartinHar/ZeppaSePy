@@ -6,7 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import random
-from os import path
+# from os import path
 
 
 make_rand_number = '0123456789'
@@ -109,6 +109,10 @@ def user_verification():
     admin_code.send_keys('LOII', Keys.RETURN)
     children = driver.find_element(By.XPATH, "(//input[@role='combobox'])[6]")
     children.send_keys('1', Keys.RETURN)
+    asCliCode = driver.find_element(By.XPATH, "//input[@name='asCliCode']")
+    asCliCode.send_keys(generate_random_number(make_rand_number, 8))
+    asAccountNumber = driver.find_element(By.XPATH, "//input[@name='asAccountNumber']")
+    asAccountNumber.send_keys(generate_random_number(make_rand_number, 11))
     first_name = driver.find_element(By.CSS_SELECTOR, '[name="firstName"]')
     first_name.send_keys(generate_random_arm_word(make_arm_word, 4))
     last_name = driver.find_element(By.CSS_SELECTOR, '[name="lastName"]')
@@ -157,7 +161,7 @@ def user_verification():
 
 
 def main():
-    # add_user_from_swagger()
+    add_user_from_swagger()
     user_verification()
 
 

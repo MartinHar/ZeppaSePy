@@ -31,8 +31,8 @@ def generate_random_number(make_rand_number, n):
     return ''.join(random.choices(make_rand_number, k=n))
 
 
-LO_email = 'loii@sef.am'
-LO_password = 'Password1'
+LO_email = 'automation_lo24@sef.am'
+LO_password = 'Password5'
 
 
 class addPotentialPartner:

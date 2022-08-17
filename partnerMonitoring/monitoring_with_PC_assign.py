@@ -5,8 +5,8 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -47,7 +47,7 @@ BM_password = 'Password1'
 PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 LO_email = 'loii@sef.am'
-LO_password = 'Password1'
+LO_password = 'Password2'
 
 threeMonthsCashMoneyCirculation = '5000000'
 threeMonthsNonCashMoneyCirculation = '2000000'
@@ -94,7 +94,7 @@ def lo_cycle():
     max_Loan_Amount.send_keys(maxLoanAmount)
     additional_Info = driver.find_element(By.CSS_SELECTOR, '[name="additionalInfo"]')
     additional_Info.send_keys(additionalInfo)
-    save_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Պահպանել')]")
+    save_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Պահպանել')]")
     save_btn.click()
 
 
@@ -117,7 +117,7 @@ def bm_cycle():
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
 
-    BM_Sales_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՄՃ/Վաճառք հաստատում')]")
+    BM_Sales_btn = driver.find_element(By.XPATH, "//button[contains(text(),'ՄՃ/Վաճառք հաստատում')]")
     BM_Sales_btn.click()
     time.sleep(2)
 
@@ -140,7 +140,7 @@ def pc_assign():
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
-    assign_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Հանձնարարել')]")
+    assign_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Հանձնարարել')]")
     assign_btn.click()
     time.sleep(1)
     adm = driver.find_element(By.XPATH, "//div[@class='ant-select-selector']")
@@ -150,7 +150,7 @@ def pc_assign():
     s_admin.click()
     assign_comment = driver.find_element(By.XPATH, "//div[@class='ant-modal-body']//textarea[@class='ant-input']")
     assign_comment.send_keys(additionalInfo)
-    assign_btn = driver.find_element(By.XPATH, "//div[@class='ant-modal-footer']//span[contains(text(),'Հանձնարարել')]")
+    assign_btn = driver.find_element(By.XPATH, "//div[@class='ant-modal-footer']//button[@type='button'][contains(text(),'Հանձնարարել')]")
     assign_btn.click()
     time.sleep(2)
 
@@ -173,7 +173,7 @@ def lo_approval():
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
-    execute_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Կատարել')]")
+    execute_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Կատարել')]")
     execute_btn.click()
     time.sleep(2)
 
@@ -195,7 +195,7 @@ def pc_approval():
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
-    PC_approve_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՀՊ հաստատում')]")
+    PC_approve_btn = driver.find_element(By.XPATH, "//button[contains(text(),'ՀՊ հաստատում')]")
     PC_approve_btn.click()
     time.sleep(2)
     general_page = driver.find_element(By.XPATH, "//div[contains(text(),'Ընդհանուր')]")
@@ -206,8 +206,8 @@ def pc_approval():
 
 
 def main():
-    lo_cycle()
-    bm_cycle()
+    # lo_cycle()
+    # bm_cycle()
     pc_assign()
     lo_approval()
     pc_approval()

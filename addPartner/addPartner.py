@@ -39,9 +39,9 @@ pdf = path.abspath(path.join(path.dirname(__file__), '2.pdf'))
 png = path.abspath(path.join(path.dirname(__file__), '3.png'))
 main_file = path.abspath(path.join(path.dirname(__file__), '4.zip'))
 
-store_number = '1'
+store_number = '3'
 LO_email = 'loii@sef.am'
-LO_password = 'Password1'
+LO_password = 'Password2'
 LGL_email = 'testlo@sef.am'
 LGL_password = 'Password3'
 email_of_store = 'partner_selenium.py@python.py'
@@ -65,7 +65,8 @@ def add_potential_partner():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
+    # potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
+    potentialPartners_tab = driver.find_element(By.XPATH, "(//div[contains(text(),'Գրանցված գործընկերներ')])[2]")  # after bug fiexed change to old
     potentialPartners_tab.click()
     addPotentialPartner_btn = driver.find_element(By.XPATH, "//span[.='Գրանցել գործընկերոջը']")
     addPotentialPartner_btn.click()
@@ -112,7 +113,8 @@ def filtering_potential_partner():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
+    # potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
+    potentialPartners_tab = driver.find_element(By.XPATH, "(//div[contains(text(),'Գրանցված գործընկերներ')])[2]")  # after bug fiexed change to old
     potentialPartners_tab.click()
     lastPartner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0'])[{store_number}]")
     lastPartner.click()
@@ -145,7 +147,8 @@ def add_chain():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
+    # potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
+    potentialPartners_tab = driver.find_element(By.XPATH, "(//div[contains(text(),'Գրանցված գործընկերներ')])[2]")  # after bug fiexed change to old
     potentialPartners_tab.click()
     # lastPartner = driver.find_element(By.CSS_SELECTOR, f"[data-row-key='[{store_number}]'") #not working with {store_number}
     lastPartner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0'])[{store_number}]")
@@ -223,8 +226,8 @@ def add_chain():
 
 
 def main():
-    add_potential_partner()
-    filtering_potential_partner()
+    # add_potential_partner()
+    # filtering_potential_partner()
     add_chain()
 
 

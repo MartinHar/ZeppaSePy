@@ -41,12 +41,12 @@ def as_codes():
 
 
 store_number = '1'
-BM_email = 'bm24@sef.am'
-BM_password = 'Password1'
-PC_email = 'pc_auto@sef.am'
-PC_password = 'Password1'
-LO_email = 'lo24@sef.am'
-LO_password = 'Password1'
+LO_email = 'automation_lo24@sef.am'
+LO_password = 'Password5'
+BM_email = 'automation_bm24@sef.am'
+BM_password = 'Password5'
+PC_email = 'automation_pc@sef.am'
+PC_password = 'Password5'
 
 threeMonthsCashMoneyCirculation = '5000000'
 threeMonthsNonCashMoneyCirculation = '2000000'
