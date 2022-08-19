@@ -1,3 +1,4 @@
+import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -37,7 +38,7 @@ def generate_random_number(make_rand_number, n):
 
 SUPM_email = 'supm@sef.am'
 SUPM_password = 'Password3'
-admin_role = 'ՄՃ'
+admin_role = 'ԻԾ'
 branch_code = 'S93'
 password = 'Password1'
 fixed_passport_start_date = '01-01-2020'
@@ -80,26 +81,39 @@ def add_admin():
     admin_email = driver.find_element(By.CSS_SELECTOR, "[name='email']")
     admin_email.send_keys('aut_' + generate_random_eng_word(make_eng_word, 4))
 
-    if admin_role == 'ՎՄ' or admin_role == 'ՄՃ' or admin_role == 'Վաճառք' or admin_role == 'ՄՌ':
+    if admin_role == 'ՎՄ' or admin_role == 'ՄՃ' or admin_role == 'Վաճառք' or admin_role == 'ՄՌ' or admin_role == 'ԻԾ':
         try:
             driver.implicitly_wait(2)
             driver.find_element(By.CSS_SELECTOR, "[name='passportId']")
         except NoSuchElementException:
             print('WARNING!: Field is missing')
+            driver.close()
+            sys.exit()              #stops script , to not show selenium error messages in console!
         passportId = driver.find_element(By.CSS_SELECTOR, "[name='passportId']")
         passportId.send_keys(generate_random_eng_word(make_eng_word, 2) + generate_random_number(make_rand_number, 4))
         passport_start_date = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[1]")
         passport_start_date.send_keys(fixed_passport_start_date)
         passport_end_date = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[2]")
         passport_end_date.send_keys(fixed_passport_end_date)
-
+        issuingAuthority = driver.find_element(By.CSS_SELECTOR, "[name='issuingAuthority']")
+        issuingAuthority.send_keys(generate_random_number(make_rand_number, 3))
+        city = driver.find_element(By.XPATH, "(//input[@role='combobox'])[3]")
+        city.send_keys('Երևան', Keys.RETURN)
+        time.sleep(1)
+        region = driver.find_element(By.XPATH, "(//input[@role='combobox'])[4]")
+        region.send_keys('Կենտրոն', Keys.RETURN)
+        street = driver.find_element(By.CSS_SELECTOR, "[name='addressDTO.street']")
+        street.send_keys('Աբովյան')
+        houseNumber = driver.find_element(By.CSS_SELECTOR, "[name='addressDTO.houseNumber']")
+        houseNumber.send_keys('7')
+        apartmentNumber = driver.find_element(By.CSS_SELECTOR, "[name='addressDTO.apartmentNumber']")
+        apartmentNumber.send_keys('111')
     admin_password = driver.find_element(By.CSS_SELECTOR, "[name='password']")
     admin_password.send_keys(password)
     admin_repeatPassword = driver.find_element(By.CSS_SELECTOR, "[name='repeatPassword']")
     admin_repeatPassword.send_keys(password)
     # save_btb = driver.find_element(By.XPATH, "//button[@type='submit']")
     # save_btb.click()
-
 
 
 def main():

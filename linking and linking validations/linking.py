@@ -1,3 +1,4 @@
+import sys
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -22,6 +23,7 @@ def green_banner(banner_xpath):
             print('WARNING: Green validation message text is incorrect')
     except NoSuchElementException:
         print('WARNING: No green validation message is detected on: ' + str(banner_xpath))
+        sys.exit()
 
 
 def check_field_empty_or_not(element):
@@ -36,8 +38,8 @@ PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 SUPM_email = 'supm@sef.am'
 SUPM_password = 'Password3'
-store_number_link = '2'
-store_number = '1'
+store_number_link = '1'
+store_number = '4'
 
 driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
 driver.maximize_window()
@@ -112,6 +114,7 @@ def phone_number_case():
             print('WARNING! Banner text is incorrect')
     except NoSuchElementException:
         print('WARNING! No banner detected')
+        sys.exit()
 
 
 def linking_other_fields():
@@ -165,8 +168,8 @@ def linking_other_fields():
 
 
 def main():
-    # phone_number_case()
-    linking_other_fields()
+    phone_number_case()
+    # linking_other_fields()
 
 
 if __name__ == '__main__':
