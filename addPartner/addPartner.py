@@ -65,8 +65,7 @@ def add_potential_partner():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    # potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
-    potentialPartners_tab = driver.find_element(By.XPATH, "(//div[contains(text(),'Գրանցված գործընկերներ')])[2]")  # after bug fiexed change to old
+    potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
     potentialPartners_tab.click()
     addPotentialPartner_btn = driver.find_element(By.XPATH, "//span[.='Գրանցել գործընկերոջը']")
     addPotentialPartner_btn.click()
@@ -113,8 +112,7 @@ def filtering_potential_partner():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    # potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
-    potentialPartners_tab = driver.find_element(By.XPATH, "(//div[contains(text(),'Գրանցված գործընկերներ')])[2]")  # after bug fiexed change to old
+    potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
     potentialPartners_tab.click()
     lastPartner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0'])[{store_number}]")
     lastPartner.click()
@@ -147,14 +145,13 @@ def add_chain():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    # potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
-    potentialPartners_tab = driver.find_element(By.XPATH, "(//div[contains(text(),'Գրանցված գործընկերներ')])[2]")  # after bug fiexed change to old
+    potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
     potentialPartners_tab.click()
     # lastPartner = driver.find_element(By.CSS_SELECTOR, f"[data-row-key='[{store_number}]'") #not working with {store_number}
     lastPartner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0'])[{store_number}]")
     lastPartner.click()
 
-    reg_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Գրանցել')]")
+    reg_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Գրանցել')]")
     reg_btn.click()
 
     phoneNumber = driver.find_element(By.CSS_SELECTOR, '[name="phoneNumber"]')

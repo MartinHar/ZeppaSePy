@@ -9,6 +9,8 @@ from selenium.webdriver.common.by import By
 # from selenium.webdriver.support import expected_conditions as EC
 import random
 
+
+store_number = input('Enter stores location number from partners list: ')
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 
@@ -43,13 +45,12 @@ def as_codes():
         print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
 
 
-store_number = '1'
 BM_email = 'mj11@sef.am'
 BM_password = 'Password1'
 PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 LO_email = 'loii@sef.am'
-LO_password = 'Password1'
+LO_password = 'Password2'
 
 threeMonthsCashMoneyCirculation = '5000000'
 threeMonthsNonCashMoneyCirculation = '2000000'
@@ -78,6 +79,12 @@ class LOCycle:
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
+    check_Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]') \
+        .get_attribute("value")
+    if len(check_Money_Circulation) != 0:
+        time.sleep(5)
+        driver.quit()
+        print("Warning: monitoring information is already filled")
     Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]')
     Money_Circulation.send_keys(threeMonthsCashMoneyCirculation)
     Money_Circulation_nonCash = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsNonCashMoneyCirculation"]')

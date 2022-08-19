@@ -81,7 +81,7 @@ def lo_cycle():
     if len(check_Money_Circulation) != 0:
         time.sleep(5)
         driver.quit()
-        print("Warning: monitoring information is already fillezd")
+        print("Warning: monitoring information is already filled")
     Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]')
     Money_Circulation.send_keys(threeMonthsCashMoneyCirculation)
     Money_Circulation_nonCash = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsNonCashMoneyCirculation"]')
