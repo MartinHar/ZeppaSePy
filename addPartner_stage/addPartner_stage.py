@@ -52,9 +52,9 @@ passport_exp_date = '01-01-2032'
 PE_issue_day = '01-01-2000'
 
 
-
-class addPotentialPartner:
+def add_potential_partner():
     driver.get(url)
+    driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LO_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
@@ -99,8 +99,9 @@ class addPotentialPartner:
     save_btn.click()
 
 
-class filteringPotentialPartner:
+def filtering_potential_partner():
     driver.get(url)
+    driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LGL_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
@@ -131,8 +132,9 @@ class filteringPotentialPartner:
     save_button.click()
 
 
-class add_chain:
+def add_chain():
     driver.get(url)
+    driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LO_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
@@ -171,7 +173,7 @@ class add_chain:
     bankAccountUsd = driver.find_element(By.CSS_SELECTOR, '[name="bankAccountUsd"]')
     bankAccountUsd.send_keys(generate_random_number(make_rand_number, 10))
     adminCode = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
-    adminCode.send_keys('YYLO', Keys.RETURN)
+    adminCode.send_keys('autLO', Keys.RETURN)
     bornDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[1]")
     bornDate.send_keys(born_date_of_store, Keys.RETURN)
     residency = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[2]")
@@ -216,3 +218,13 @@ class add_chain:
     # attachZIP.send_keys(main_file)
     # saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     # saveBTN.click()
+
+
+def main():
+    add_potential_partner()
+    filtering_potential_partner()
+    add_chain()
+
+
+if __name__ == '__main__':
+    main()
