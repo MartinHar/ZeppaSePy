@@ -74,6 +74,7 @@ partners_tab.click()
 Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number_link}]")
 Partner.click()
 
+
 # if we get_attribute from variable , it will not work correctly.
 # COLLECTING INFORMATION
 # Phone number          (must not be linked if there is a store with this phone number)
