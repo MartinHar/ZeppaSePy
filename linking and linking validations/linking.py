@@ -26,6 +26,21 @@ def green_banner(banner_xpath):
         sys.exit()
 
 
+def phone_number_banner_check():
+    try:
+        error_banner = driver.find_element(By.XPATH, "//div[@class='ant-message-notice-content']").text
+        check = str(error_banner) == \
+                'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա են հաճախորդի և գործընկերոջ հաշիվներ։' \
+                or str(error_banner) == 'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա է գործընկերոջ հաշիվ։'
+        if check is True:
+            print('Phone number exist, banner validation message is: ' + str(check))
+        else:
+            print('WARNING! Banner text is incorrect')
+    except NoSuchElementException:
+        print('WARNING! No banner detected')
+        sys.exit()
+
+
 def check_field_empty_or_not(element):
     if len(element) == 0:
         # print(f'{field} field is empty')
@@ -38,8 +53,8 @@ PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 SUPM_email = 'supm@sef.am'
 SUPM_password = 'Password3'
-store_number_link = '1'
-store_number = '4'
+store_number_link = '6'
+store_number = '1'
 
 driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
 driver.maximize_window()
@@ -54,8 +69,9 @@ login_button.click()
 
 partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
 partners_tab.click()
-Partner = driver.find_element(
-    By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number_link}]")
+# Partner = driver.find_element(
+#     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number_link}]")
+Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number_link}]")
 Partner.click()
 
 # if we get_attribute from variable , it will not work correctly.
@@ -85,13 +101,20 @@ check_field_empty_or_not(passportId_link)
 
 partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
 partners_tab.click()
-Partner = driver.find_element(
-    By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+#     not counting deleted stores
+# Partner = driver.find_element(
+#     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
 Partner.click()
-asCliCode = driver.find_element(By.XPATH, "//input[@name='asCliCode']").get_attribute("value")
-asAccountNumber = driver.find_element(By.XPATH, "//input[@name='asAccountNumber']").get_attribute("value")
+try:
+    driver.implicitly_wait(1)
+    asCliCode = driver.find_element(By.XPATH, "//input[@name='asCliCode']").get_attribute("value")
+    asAccountNumber = driver.find_element(By.XPATH, "//input[@name='asAccountNumber']").get_attribute("value")
+except NoSuchElementException:
+    print('AS fields not located')
 
 
+#  Check banner messages when phone number matching
 def phone_number_case():
     # Phone number
     phoneNumber_main = driver.find_element(By.XPATH, '//input[@type="number"]')
@@ -101,20 +124,7 @@ def phone_number_case():
     save_btn = driver.find_element(By.XPATH, "//button[@class='ant-btn ant-btn-primary unblock_button']")
     save_btn.click()
     time.sleep(1)
-    try:
-        error_banner = driver.find_element(By.XPATH, "//div[@class='ant-message-notice-content']").text
-        check = str(error_banner) == \
-                'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ ' \
-                'Տվյալ հեռախոսահամարով արդեն առկա են հաճախորդի և գործընկերոջ հաշիվներ։' \
-                or str(error_banner) == 'Դուք չեք կարող ' \
-                'օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա են հաճախորդի և գործընկերոջ հաշիվներ։'
-        if check is True:
-            print('Phone number exist, banner validation message is: ' + str(check))
-        else:
-            print('WARNING! Banner text is incorrect')
-    except NoSuchElementException:
-        print('WARNING! No banner detected')
-        sys.exit()
+    phone_number_banner_check()
 
 
 def linking_other_fields():
@@ -168,8 +178,8 @@ def linking_other_fields():
 
 
 def main():
-    phone_number_case()
-    # linking_other_fields()
+    # phone_number_case()
+    linking_other_fields()
 
 
 if __name__ == '__main__':
