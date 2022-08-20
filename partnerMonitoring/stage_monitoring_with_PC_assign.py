@@ -69,8 +69,9 @@ def lo_cycle():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -117,8 +118,9 @@ def bm_cycle():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -141,8 +143,9 @@ def pc_assign():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -175,8 +178,9 @@ def lo_approval():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
@@ -197,8 +201,9 @@ def bm_cycle_2():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -221,8 +226,9 @@ def pc_approval():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()

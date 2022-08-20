@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 import random
 
 
-store_number = input('Enter stores location number from partners list: ')
+store_number = input('Enter store location number from partners list: ')
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 
@@ -73,8 +73,9 @@ class LOCycle:
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -119,8 +120,9 @@ class BMCycle:
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -142,8 +144,9 @@ class PCCycle:
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    # Partner = driver.find_element(
+    #     By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@data-row-key])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
