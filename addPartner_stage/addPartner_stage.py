@@ -214,15 +214,15 @@ def add_chain():
     serviceSelect.send_keys('Ծառայություն - Այլ', Keys.RETURN)
     sameCheckbox = driver.find_element(By.XPATH, "//span[contains(text(),'Նույնն է')]")
     sameCheckbox.click()
-    # attachZIP = driver.find_element(By.XPATH, "//input[@type='file']")
-    # attachZIP.send_keys(main_file)
+    attachZIP = driver.find_element(By.XPATH, "//input[@type='file']")
+    attachZIP.send_keys(main_file)
     # saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     # saveBTN.click()
 
 
 def main():
-    add_potential_partner()
-    filtering_potential_partner()
+    # add_potential_partner()
+    # filtering_potential_partner()
     add_chain()
 
 

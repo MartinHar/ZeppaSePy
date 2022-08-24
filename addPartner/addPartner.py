@@ -39,7 +39,7 @@ pdf = path.abspath(path.join(path.dirname(__file__), '2.pdf'))
 png = path.abspath(path.join(path.dirname(__file__), '3.png'))
 main_file = path.abspath(path.join(path.dirname(__file__), '4.zip'))
 
-store_number = '3'
+store_number = '1'
 LO_email = 'loii@sef.am'
 LO_password = 'Password2'
 LGL_email = 'testlo@sef.am'
