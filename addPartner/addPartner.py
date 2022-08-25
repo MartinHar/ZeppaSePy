@@ -67,7 +67,7 @@ def add_potential_partner():
     partners_tab.click()
     potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
     potentialPartners_tab.click()
-    addPotentialPartner_btn = driver.find_element(By.XPATH, "//span[.='Գրանցել գործընկերոջը']")
+    addPotentialPartner_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Գրանցել գործընկերոջը')]")
     addPotentialPartner_btn.click()
 
     legalName_fld = driver.find_element(By.CSS_SELECTOR, '[name="legalName"]')

@@ -38,11 +38,12 @@ jpg = path.abspath(path.join(path.dirname(__file__), '1.jpg'))
 pdf = path.abspath(path.join(path.dirname(__file__), '2.pdf'))
 png = path.abspath(path.join(path.dirname(__file__), '3.png'))
 main_file = path.abspath(path.join(path.dirname(__file__), '4.zip'))
-url = 'http://ec2-63-34-222-67.eu-west-1.compute.amazonaws.com/login'
-LO_email = 'automation_lo24@sef.am'
-LO_password = 'Password5'
-LGL_email = 'automation_lgl@sef.am'
-LGL_password = 'Password5'
+
+store_number = '1'
+LO_email = 'testbr@sef.am'
+LO_password = 'Password3'
+LGL_email = 'testlo@sef.am'
+LGL_password = 'Password3'
 email_of_store = 'partner_selenium.py@python.py'
 url_of_store = 'https://www.selenium.dev/documentation/'
 born_date_of_store = '01-01-1991'
@@ -53,7 +54,7 @@ PE_issue_day = '01-01-2000'
 
 
 def add_potential_partner():
-    driver.get(url)
+    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LO_email)
@@ -66,7 +67,7 @@ def add_potential_partner():
     partners_tab.click()
     potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
     potentialPartners_tab.click()
-    addPotentialPartner_btn = driver.find_element(By.XPATH, "//span[.='Գրանցել գործընկերոջը']")
+    addPotentialPartner_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Գրանցել գործընկերոջը')]")
     addPotentialPartner_btn.click()
 
     legalName_fld = driver.find_element(By.CSS_SELECTOR, '[name="legalName"]')
@@ -80,7 +81,7 @@ def add_potential_partner():
     patronymic_fld = driver.find_element(By.CSS_SELECTOR, '[name="patronymic"]')
     patronymic_fld.send_keys(generate_random_arm_word(make_arm_word, 5))
     BR_number = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
-    BR_number.send_keys('Y24', Keys.RETURN)
+    BR_number.send_keys('y20', Keys.RETURN)
     region = driver.find_element(By.XPATH, "(//span[@class='ant-select-selection-item'])[2]")
     region.click()
     region_yerevan = driver.find_element(By.XPATH, "(//div[contains(text(),'Երևան')])[1]")
@@ -100,7 +101,7 @@ def add_potential_partner():
 
 
 def filtering_potential_partner():
-    driver.get(url)
+    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LGL_email)
@@ -113,7 +114,7 @@ def filtering_potential_partner():
     partners_tab.click()
     potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
     potentialPartners_tab.click()
-    lastPartner = driver.find_element(By.CSS_SELECTOR, '[data-row-key="1"]')
+    lastPartner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0'])[{store_number}]")
     lastPartner.click()
 
     filterPartner = driver.find_element(By.CSS_SELECTOR, '[value="FILTER"]')
@@ -133,7 +134,7 @@ def filtering_potential_partner():
 
 
 def add_chain():
-    driver.get(url)
+    driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     login_email.send_keys(LO_email)
@@ -146,10 +147,11 @@ def add_chain():
     partners_tab.click()
     potentialPartners_tab = driver.find_element(By.XPATH, "//div[.='Հավանական գործընկերներ']")
     potentialPartners_tab.click()
-    lastPartner = driver.find_element(By.CSS_SELECTOR, '[data-row-key="1"]')
+    # lastPartner = driver.find_element(By.CSS_SELECTOR, f"[data-row-key='[{store_number}]'") #not working with {store_number}
+    lastPartner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0'])[{store_number}]")
     lastPartner.click()
 
-    reg_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Գրանցել')]")
+    reg_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Գրանցել')]")
     reg_btn.click()
 
     phoneNumber = driver.find_element(By.CSS_SELECTOR, '[name="phoneNumber"]')
@@ -173,7 +175,7 @@ def add_chain():
     bankAccountUsd = driver.find_element(By.CSS_SELECTOR, '[name="bankAccountUsd"]')
     bankAccountUsd.send_keys(generate_random_number(make_rand_number, 10))
     adminCode = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
-    adminCode.send_keys('autLO', Keys.RETURN)
+    adminCode.send_keys('LHK', Keys.RETURN)
     bornDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[1]")
     bornDate.send_keys(born_date_of_store, Keys.RETURN)
     residency = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[2]")
@@ -191,7 +193,7 @@ def add_chain():
     passport = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[5]")
     passport.send_keys('ՀՀ նույնականացման քարտ', Keys.RETURN)
     passportID = driver.find_element(By.CSS_SELECTOR, '[name="passportId"]')
-    passportID.send_keys(generate_random_number('sel' + make_rand_number, 5))
+    passportID.send_keys(generate_random_number('se' + make_rand_number, 5))
     issuingAuthority = driver.find_element(By.CSS_SELECTOR, '[name="issuingAuthority"]')
     issuingAuthority.send_keys(generate_random_number(make_rand_number, 3))
     passportIssueDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[3]")
@@ -207,11 +209,11 @@ def add_chain():
     productCheckbox = driver.find_element(By.XPATH, "(//input[@name='addressDTOS[0].productChecked'])[1]")
     productCheckbox.click()
     productSelect = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[8]")
-    productSelect.send_keys('Ապրանք - Անշարժ գույք', Keys.RETURN)
+    productSelect.send_keys('Ապրանք - Մթերք', Keys.RETURN)
     serviceCheckbox = driver.find_element(By.XPATH, "(//input[contains(@name,'addressDTOS[0].serviceChecked')])[1]")
     serviceCheckbox.click()
     serviceSelect = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[8]")
-    serviceSelect.send_keys('Ծառայություն - Այլ', Keys.RETURN)
+    serviceSelect.send_keys('Այս գարուն', Keys.RETURN)
     sameCheckbox = driver.find_element(By.XPATH, "//span[contains(text(),'Նույնն է')]")
     sameCheckbox.click()
     attachZIP = driver.find_element(By.XPATH, "//input[@type='file']")
@@ -228,3 +230,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
