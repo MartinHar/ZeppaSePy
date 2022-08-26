@@ -149,8 +149,8 @@ def pc_cycle():
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
-    # PC_approve_btn = driver.find_element(By.XPATH, "//button[contains(text(),'ՀՊ հաստատում')]")
-    # PC_approve_btn.click()
+    PC_approve_btn = driver.find_element(By.XPATH, "//button[contains(text(),'ՀՊ հաստատում')]")
+    PC_approve_btn.click()
     time.sleep(2)
     # WebDriverWait(driver, 5)          not woriking in this case
     general_page = driver.find_element(By.XPATH, "//div[contains(text(),'Ընդհանուր')]")

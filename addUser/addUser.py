@@ -37,20 +37,17 @@ def add_user_from_swagger():
     nickname = generate_random_eng_word(make_eng_word, 4)
     password = 'Password1'
 
-    send_code_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/' \
-                    'swagger/user/api/user/authentication/send-code?phone='
+    send_code_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/swagger/user/api/user/authentication/send-code?phone='
     send_sms = requests.get(send_code_url + phone_number)
     print(send_sms.content)
 
-    submit_code_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com' \
-                      '/swagger/user/api/user/authentication/submit-code?phone='
+    submit_code_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/swagger/user/api/user/authentication/submit-code?phone='
     sms_code = input('Enter SMS code: ')
 
     submit_code = requests.get(submit_code_url + phone_number + '&code=' + sms_code)
     print(submit_code.content)
 
-    reg_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/' \
-              'swagger/user/api/user/registration/'
+    reg_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/swagger/user/api/user/registration/'
     reg_details = {
         "phoneNumber": phone_number,
         "firstNameEng": first_name,
