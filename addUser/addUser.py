@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import random
+import sys
 # from os import path
 
 
@@ -59,6 +60,8 @@ def add_user_from_swagger():
 
     reg_user = requests.post(reg_url, json=reg_details)
     print(reg_user.content)
+    if reg_user.status_code != 200:
+        sys.exit()
 
 
 def user_verification():

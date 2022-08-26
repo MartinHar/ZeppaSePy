@@ -1,11 +1,13 @@
-import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+import sys
+import requests
 import random
-from os import path
+import time
+# from os import path
 
 
 make_rand_number = '0123456789'
@@ -36,20 +38,17 @@ def add_user_from_swagger():
     nickname = generate_random_eng_word(make_eng_word, 4)
     password = 'Password1'
 
-    send_code_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/' \
-                    'swagger/user/api/user/authentication/send-code?phone='
+    send_code_url = 'http://ec2-54-194-134-145.eu-west-1.compute.amazonaws.com/swagger/user/api/user/authentication/send-code?phone='
     send_sms = requests.get(send_code_url + phone_number)
     print(send_sms.content)
 
-    submit_code_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com' \
-                      '/swagger/user/api/user/authentication/submit-code?phone='
+    submit_code_url = 'http://ec2-54-194-134-145.eu-west-1.compute.amazonaws.com/swagger/user/api/user/authentication/submit-code?phone='
     sms_code = input('Enter SMS code: ')
 
     submit_code = requests.get(submit_code_url + phone_number + '&code=' + sms_code)
     print(submit_code.content)
 
-    reg_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/' \
-              'swagger/user/api/user/registration/'
+    reg_url = 'http://ec2-54-194-134-145.eu-west-1.compute.amazonaws.com/swagger/user/api/user/registration/'
     reg_details = {
         "phoneNumber": phone_number,
         "firstNameEng": first_name,
@@ -61,23 +60,24 @@ def add_user_from_swagger():
 
     reg_user = requests.post(reg_url, json=reg_details)
     print(reg_user.content)
+    if reg_user.status_code != 200:
+        sys.exit()
 
 
 # add_user_from_swagger()
-
-
-class user_verification:
+def user_verification():
     born_date_of_user = '01-01-1999'
     social_card_issue_date = '01-01-2019'
     passport_issue_date = '01-12-2020'
     passport_exp_date = '01-01-2035'
     email_address = 'user_selenium.py@python.py'
     passportID = generate_random_eng_word(make_eng_word, 2) + generate_random_number(make_rand_number, 4)
-    user_street_adr = generate_random_arm_word(make_arm_word, 3) + '1 . / -'
+    user_street_adr = generate_random_arm_word(make_arm_word, 3) + '1 / -'
     user_house_num = generate_random_arm_word(make_arm_word, 3) + '1/-'
-    user_apt_num = generate_random_arm_word(make_arm_word, 3) + '1 / -'
-    LO_email = 'lo24@sef.am'
-    LO_password = 'Password1'
+    user_apt_num = generate_random_arm_word(make_arm_word, 3) + '1/-'
+    # main_file = path.abspath(path.join(path.dirname(__file__), 'mainFile.zip'))           #need to be automated ...
+    LO_email = 'automation_lo24@sef.am'
+    LO_password = 'Password5'
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.implicitly_wait(10)
@@ -93,8 +93,10 @@ class user_verification:
     login_button.click()
     user = driver.find_element(By.XPATH, "(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[1]")
     user.click()
+    time.sleep(1)
     verification_page = driver.find_element(By.XPATH, "//div[contains(text(),'Վավերացում')]")
-    verification_page.click(),
+    verification_page.click()
+    time.sleep(1)
     born_date = driver.find_element(By.XPATH, "//div[@class='ant-picker']//input[@placeholder='Select date']")
     born_date.click()
     born_date.send_keys(born_date_of_user, Keys.RETURN)
@@ -105,7 +107,13 @@ class user_verification:
     nationality = driver.find_element(By.CSS_SELECTOR, "[aria-owns='rc_select_3_list']")
     nationality.send_keys('ՀՀ քաղաքացի', Keys.RETURN)
     admin_code = driver.find_element(By.CSS_SELECTOR, "[aria-owns='rc_select_4_list']")
-    admin_code.send_keys('LOII', Keys.RETURN)
+    admin_code.send_keys('autLO', Keys.RETURN)
+    children = driver.find_element(By.XPATH, "(//input[@role='combobox'])[6]")
+    children.send_keys('1', Keys.RETURN)
+    asCliCode = driver.find_element(By.XPATH, "//input[@name='asCliCode']")
+    asCliCode.send_keys(generate_random_number(make_rand_number, 8))
+    asAccountNumber = driver.find_element(By.XPATH, "//input[@name='asAccountNumber']")
+    asAccountNumber.send_keys(generate_random_number(make_rand_number, 11))
     first_name = driver.find_element(By.CSS_SELECTOR, '[name="firstName"]')
     first_name.send_keys(generate_random_arm_word(make_arm_word, 4))
     last_name = driver.find_element(By.CSS_SELECTOR, '[name="lastName"]')
@@ -114,10 +122,12 @@ class user_verification:
     patronymic.send_keys(generate_random_arm_word(make_arm_word, 4))
     socialCard = driver.find_element(By.CSS_SELECTOR, '[name="socialCard"]')
     socialCard.send_keys(generate_random_number(make_rand_number, 10))
+    socialCardDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[4]")
+    socialCardDate.send_keys(social_card_issue_date, Keys.RETURN)
     user_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     user_email.send_keys(email_address)
     user_passport = driver.find_element(By.CSS_SELECTOR, "[aria-owns='rc_select_2_list']")
-    user_passport.send_keys('Անձնագիր')
+    user_passport.send_keys('Անձնագիր', Keys.RETURN)
     user_passportID = driver.find_element(By.CSS_SELECTOR, '[name="passportId"]')
     user_passportID.send_keys(passportID)
     p_issuingAuthority = driver.find_element(By.CSS_SELECTOR, '[name="issuingAuthority"]')
@@ -140,11 +150,24 @@ class user_verification:
     user_apt.send_keys(user_apt_num)
     same_checkbox = driver.find_element(By.XPATH, "//span[contains(text(),'Նույնն է')]")
     same_checkbox.click()
+    upload_mainFile_btn = driver.find_element(By.XPATH, "//button[.='Ընտրել ֆայլ']")
+    upload_mainFile_btn.click()
+    time.sleep(1)
+    upload_mainFile_rd = driver.find_element(By.XPATH, "(//span[@class='ant-radio'])[2]")
+    upload_mainFile_rd.click()
+    time.sleep(1)
+    next_btn = driver.find_element(By.XPATH, "//button[.='Հաջորդ']")
+    next_btn.click()
+    time.sleep(2000)
 
 
+def main():
+    # add_user_from_swagger()
+    user_verification()
 
 
-
+if __name__ == '__main__':
+    main()
 
 
 
