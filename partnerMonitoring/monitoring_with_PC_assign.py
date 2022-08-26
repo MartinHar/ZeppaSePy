@@ -9,6 +9,7 @@ from selenium.webdriver.common.by import By
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.common.keys import Keys
 
+store_number = input('Enter store location number from partners list: ')
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 driver.implicitly_wait(10)
 
@@ -34,14 +35,12 @@ def generate_random_number(make_rand_number, n):
 def as_codes():
     driver.implicitly_wait(2)
     try:
-        driver.find_element(By.CSS_SELECTOR, '[name="asCliCode"]') and \
-        driver.find_element(By.CSS_SELECTOR, '[name="asAccountNumber"]')
+        driver.find_element(By.CSS_SELECTOR, '[name="asCliCode"]') and driver.find_element(By.CSS_SELECTOR, '[name="asAccountNumber"]')
         print('ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are present')
     except NoSuchElementException:
         print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
 
 
-store_number = '1'
 BM_email = 'mj11@sef.am'
 BM_password = 'Password1'
 PC_email = 'pcpc@sef.am'
@@ -70,8 +69,7 @@ def lo_cycle():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -110,8 +108,7 @@ def bm_cycle():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -134,8 +131,7 @@ def pc_assign():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -168,8 +164,7 @@ def lo_approval():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
@@ -190,8 +185,7 @@ def pc_approval():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(
-        By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
@@ -206,8 +200,8 @@ def pc_approval():
 
 
 def main():
-    # lo_cycle()
-    # bm_cycle()
+    lo_cycle()
+    bm_cycle()
     pc_assign()
     lo_approval()
     pc_approval()

@@ -38,8 +38,7 @@ def generate_random_number(make_rand_number, n):
 def as_codes():
     driver.implicitly_wait(2)
     try:
-        driver.find_element(By.CSS_SELECTOR, '[name="asCliCode"]') and \
-        driver.find_element(By.CSS_SELECTOR, '[name="asAccountNumber"]')
+        driver.find_element(By.CSS_SELECTOR, '[name="asCliCode"]') and driver.find_element(By.CSS_SELECTOR, '[name="asAccountNumber"]')
         print('ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are present')
     except NoSuchElementException:
         print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
@@ -61,7 +60,7 @@ maxLoanAmount = '10000000'
 additionalInfo = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, Լոռեմ իպսում դոլոր սիթ ամետ'
 
 
-class LOCycle:
+def lo_cycle():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -80,8 +79,7 @@ class LOCycle:
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
-    check_Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]') \
-        .get_attribute("value")
+    check_Money_Circulation = driver.find_element(By.CSS_SELECTOR, '[name="threeMonthsCashMoneyCirculation"]').get_attribute("value")
     if len(check_Money_Circulation) != 0:
         time.sleep(5)
         driver.quit()
@@ -104,11 +102,11 @@ class LOCycle:
     max_Loan_Amount.send_keys(maxLoanAmount)
     additional_Info = driver.find_element(By.CSS_SELECTOR, '[name="additionalInfo"]')
     additional_Info.send_keys(additionalInfo)
-    save_btn = driver.find_element(By.XPATH, "//span[contains(text(),'Պահպանել')]")
+    save_btn = driver.find_element(By.XPATH, "//button[@type='submit']")
     save_btn.click()
 
 
-class BMCycle:
+def bm_cycle():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -128,11 +126,11 @@ class BMCycle:
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
 
-    BM_Sales_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՄՃ/Վաճառք հաստատում')]")
+    BM_Sales_btn = driver.find_element(By.XPATH, "//button[contains(text(),'ՄՃ/Վաճառք հաստատում')]")
     BM_Sales_btn.click()
 
 
-class PCCycle:
+def pc_cycle():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -151,11 +149,22 @@ class PCCycle:
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
-    PC_approve_btn = driver.find_element(By.XPATH, "//span[contains(text(),'ՀՊ հաստատում')]")
-    PC_approve_btn.click()
+    # PC_approve_btn = driver.find_element(By.XPATH, "//button[contains(text(),'ՀՊ հաստատում')]")
+    # PC_approve_btn.click()
     time.sleep(2)
     # WebDriverWait(driver, 5)          not woriking in this case
     general_page = driver.find_element(By.XPATH, "//div[contains(text(),'Ընդհանուր')]")
     general_page.click()
+    driver.refresh()
+    time.sleep(2)
     as_codes()
-    
+
+
+def main():
+    # lo_cycle()
+    # bm_cycle()
+    pc_cycle()
+
+
+if __name__ == '__main__':
+    main()

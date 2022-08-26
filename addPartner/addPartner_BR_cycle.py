@@ -7,11 +7,12 @@ import random
 from os import path
 
 
+# def test_setup():
+#     global driver
+#     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+#     driver.implicitly_wait(10)
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
-
 driver.implicitly_wait(10)
-
 
 make_arm_word = 'աբգդեզէ'
 
@@ -223,9 +224,9 @@ def add_chain():
 
 
 def main():
-    # add_potential_partner()
+    add_potential_partner()
     # filtering_potential_partner()
-    add_chain()
+    # add_chain()
 
 
 if __name__ == '__main__':
