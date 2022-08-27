@@ -1,4 +1,5 @@
 import time
+import names
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -9,12 +10,51 @@ import random
 import sys
 # from os import path
 
+arm_surnames = ['Հովհաննիսյան', 'Սարգսյան', 'Գրիգորյան', 'Հարությունյան', 'Գրիգորյան', 'Սարիբեկյան', 'Խաչատրյան',
+                'Ադամյան', 'Խաչատուրյան', 'Հակոբյան', 'Պետրոսյան', 'Կարապետյան', 'Գևորգյան',
+                'Խորխորունի', 'Մամիկոնյան', 'Ղարամանյան', 'Ծառուկյան', 'Մկրտչյան', 'Վարդանյան', 'Ղազարյան',
+                'Գասպարյան', 'Մանուկյան', 'Մանուչարյան', 'Մակիչյան', 'Ավետիսյան', 'Պողոսյան', 'Սահակյան',
+                'Պեպելյան', 'Սիմոնյան', 'Արիստակեսյան', 'Բագրատյան', 'Բզնունի', 'Յայլոյան', 'Բաղդասարյան']
 
-make_rand_number = '0123456789'
+
+arm_girl_name = ['Ագապի', 'Ազատուհի', 'Այծեմնիկ', 'Անի', 'Անթառամ', 'Աշխէն', 'Ասթինէ', 'Աստղիկ', 'Արեգնազան',
+                 'Արշակուհի', 'Արտեմիս', 'Արփենիկ', 'Արփի', 'Բերկրուհի', 'Գոհար', 'Գոհարիկ', 'Դալար',
+                 'Դեղձանիկ', 'Դշխուհի', 'Դիցուհի', 'Եսթեր', 'Երանիկ', 'Երանուհի', 'Թագուհի', 'Ժպտանոյշ',
+                 'Իմաստուհի', 'Իշխանուհի', 'Իսկուհի', 'Լալա', 'Լիլիթ', 'Լուսաբեր', 'Լուսածին', 'Լուսարփի',
+                 'Լուսնթագ', 'Խոսրովանոյշ', 'Խոսրովիդուխտ', 'Ծովինար', 'Կատարինէ', 'Մարալ', 'Մարգարիտ']
 
 
-def generate_random_number(make_rand_number, n):
-    return ''.join(random.choices(make_rand_number, k=n))
+arm_boy_name = ['Աբգար', 'Աբէլ', 'Աբրահամ', 'Ադամ', 'Ազատ', 'Ալիշան', 'Ահարոն', 'Աղասի', 'Արծրուն', 'Արման',
+                'Արմենակ', 'Արմեն', 'Արշակ', 'Բագրատ', 'Բեգլար', 'Բենիամին', 'Գագիկ', 'Գալուստ', 'Գառնիկ',
+                'Գասպար', 'Գարեգին', 'Գեղամ', 'Գեղարդ', 'Խաժակ', 'Խաչատուր', 'Խաչիկ', 'Խոսրով', 'Կամսար',
+                'Կայծակ', 'Կարապետ', 'Կարեն', 'Կարպիս', 'Մհեր', 'Մուշեղ', 'Նազարեթ', 'Նժդեհ', 'Շիրազ', 'Շիրակ',
+                'Ոսկան', 'Ոսկեբերան', 'Ռազմիկ', 'Ռաֆֆի', 'Ռշտունի', 'Սերոբ', 'Սեւադա', 'Սեւակ', 'Սեւան', 'Սիմոն',
+                'Սիսակ', 'Սիրակ', 'Սիրական', 'Սիփան', 'Համազասպ', 'Համբարձում', 'Համո', 'Հայկ', 'Հայկազ',
+                'Հայկազուն', 'Ղազարոս', 'Ղուկաս', 'Մամիկոն', 'Մակար', 'Մարկոս', 'Մինաս', 'Մխիթար']
+
+
+arm_street_names = ['Աբելյան', 'Աբովյան', 'Ագաթանգեղոսի', 'Ազատամարտիկների', 'Ազատության պողոտա', 'Աթենքի',
+                    'Աթոյան', 'Ալեք Մանուկյան', 'Ալիխանյան', 'Աղայան', 'Աղյուսագործների', 'Ամիրյան', 'Այասի',
+                    'Անտառային', 'Անրի Վեռնոյի', 'Գյուլբենկյան', 'Գոհար Գասպարյան', 'Գրիգոր Հարությունյան',
+                    'Գրիգոր Տեր-Գրիգորյան', 'Դեղատան', 'Դերենիկ Դեմիրճյան', 'Եզնիկ Կողբացու', 'Եկմալյան',
+                    'Երվանդ Քոչարի', 'Զավարյան', 'Զարոբյան', 'Զաքյան', 'Էրեբունու', 'Թաիրովի', 'Ռոստովյան',
+                    'Ռուսթավելու', 'Սայաթ-Նովայի պողոտա', 'Սասունցի Դավթի', 'Սարալանջի', 'Սարմենի', 'Սարյան',
+                    'Սերգեյ Փարաջանովի', 'Սևանի', 'Սիլվա Կապուտիկյան', 'Սիմեոն Երևանցու', 'Ծատուրյան',
+                    'Ծխախոտագործների', 'Ծովակալ Իսակովի պողոտա', 'Կալենցի', 'Կասյան', 'Կարեն Դեմիրճյան',
+                    'Կիևյան', 'Կոմիտասի պողոտա', 'Տիգրան Մեծի պողոտա', 'Տոլստոյի', 'Տպագրիչների', 'Ցախի',
+                    'Փավստոս Բուզանդի', 'Քաջազնունու', 'Քոչինյան', 'Քրիստափորի', 'Օստրովսկու', 'Օրբելի եղբայրների',
+                    'Ֆիզկուլտուրնիկների', 'Ֆիրդուս']
+
+
+def name_generator():
+    choice = random.choice((arm_girl_name, arm_boy_name))
+    if choice == arm_boy_name:
+        name_gender_ = 'Boy'
+    else:
+        name_gender_ = 'Girl'
+    # print(name_gender_)
+    name_gender = random.choice(choice)
+    return name_gender, name_gender_
 
 
 make_eng_word = 'abcdefg'
@@ -22,6 +62,13 @@ make_eng_word = 'abcdefg'
 
 def generate_random_eng_word(make_eng_word, n):
     return ''.join(random.choices(make_eng_word, k=n))
+
+
+make_rand_number = '0123456789'
+
+
+def generate_random_number(make_rand_number, n):
+    return ''.join(random.choices(make_rand_number, k=n))
 
 
 make_arm_word = 'աբգդեզէ'
@@ -33,9 +80,9 @@ def generate_random_arm_word(make_arm_word, n):
 
 def add_user_from_swagger():
     phone_number = generate_random_number(make_rand_number, 8)
-    first_name = generate_random_eng_word(make_eng_word, 4)
-    last_name = generate_random_eng_word(make_eng_word, 4)
-    nickname = generate_random_eng_word(make_eng_word, 4)
+    eng_first_name = names.get_first_name()
+    eng_last_name = names.get_last_name()
+    nickname = f'{eng_first_name}.{eng_last_name}'
     password = 'Password1'
 
     send_code_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/swagger/user/api/user/authentication/send-code?phone='
@@ -51,8 +98,8 @@ def add_user_from_swagger():
     reg_url = 'http://ec2-99-80-111-210.eu-west-1.compute.amazonaws.com/swagger/user/api/user/registration/'
     reg_details = {
         "phoneNumber": phone_number,
-        "firstNameEng": first_name,
-        "lastNameEng": last_name,
+        "firstNameEng": eng_first_name,
+        "lastNameEng": eng_last_name,
         "nickname": nickname,
         "password": password,
         "repeatPassword": password
@@ -65,18 +112,29 @@ def add_user_from_swagger():
 
 
 def user_verification():
+
     born_date_of_user = '01-01-1999'
     social_card_issue_date = '01-01-2019'
     passport_issue_date = '01-12-2020'
     passport_exp_date = '01-01-2035'
     email_address = 'user_selenium.py@python.py'
     passportID = generate_random_eng_word(make_eng_word, 2) + generate_random_number(make_rand_number, 4)
-    user_street_adr = generate_random_arm_word(make_arm_word, 3) + '1 / -'
-    user_house_num = generate_random_arm_word(make_arm_word, 3) + '1/-'
-    user_apt_num = generate_random_arm_word(make_arm_word, 3) + '1/-'
+    user_street_adr = random.choice(arm_street_names) + ' 1 / -'
+    user_house_num = generate_random_arm_word(make_arm_word, 1) + '1/-'
+    user_apt_num = generate_random_arm_word(make_arm_word, 1) + '1/-'
     # main_file = path.abspath(path.join(path.dirname(__file__), 'mainFile.zip'))           #need to be automated ...
+    name_generator_ = name_generator()
+    firstName_gen = name_generator_[0]
+    gender__ = name_generator_[1]
     LO_email = 'loii@sef.am'
     LO_password = 'Password2'
+
+    def a():
+        if gender__ == 'Boy':
+            g = 'MALE'
+        else:
+            g = 'FEMALE'
+        return g
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.implicitly_wait(10)
@@ -101,8 +159,6 @@ def user_verification():
     born_date.send_keys(born_date_of_user, Keys.RETURN)
     residency_city = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
     residency_city.send_keys('Հայաստան', Keys.RETURN)
-    gender = driver.find_element(By.XPATH, "//span[contains(text(),'Արական')]")
-    gender.click()
     nationality = driver.find_element(By.CSS_SELECTOR, "[aria-owns='rc_select_3_list']")
     nationality.send_keys('ՀՀ քաղաքացի', Keys.RETURN)
     admin_code = driver.find_element(By.CSS_SELECTOR, "[aria-owns='rc_select_4_list']")
@@ -114,11 +170,13 @@ def user_verification():
     asAccountNumber = driver.find_element(By.XPATH, "//input[@name='asAccountNumber']")
     asAccountNumber.send_keys(generate_random_number(make_rand_number, 11))
     first_name = driver.find_element(By.CSS_SELECTOR, '[name="firstName"]')
-    first_name.send_keys(generate_random_arm_word(make_arm_word, 4))
+    first_name.send_keys(firstName_gen)
     last_name = driver.find_element(By.CSS_SELECTOR, '[name="lastName"]')
-    last_name.send_keys(generate_random_arm_word(make_arm_word, 4))
+    last_name.send_keys(random.choice(arm_surnames))
     patronymic = driver.find_element(By.CSS_SELECTOR, '[name="patronymic"]')
-    patronymic.send_keys(generate_random_arm_word(make_arm_word, 4))
+    patronymic.send_keys(random.choice(arm_boy_name))
+    gender = driver.find_element(By.CSS_SELECTOR, f'[value="{a()}"]')
+    gender.click()
     socialCard = driver.find_element(By.CSS_SELECTOR, '[name="socialCard"]')
     socialCard.send_keys(generate_random_number(make_rand_number, 10))
     socialCardDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[4]")
