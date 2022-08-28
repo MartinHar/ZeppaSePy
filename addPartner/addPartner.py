@@ -5,11 +5,33 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import random
 import names
+import sys
 from os import path
 
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-driver.implicitly_wait(10)
+def cycle_choice():
+    user_choice = input("Please choose admin cycle, for LO type 1 , for BR press 2: ")
+    if user_choice == '1':
+        admin_email_ = 'loii@sef.am'
+        admin_password_ = 'Password2'
+        branch_number_ = 'E11'
+        admin_code_ = 'LOII'
+        return admin_email_, admin_password_, branch_number_, admin_code_
+    elif user_choice == '2':
+        admin_email_ = 'testbr@sef.am'
+        admin_password_ = 'Password3'
+        branch_number_ = 'Y20'
+        admin_code_ = 'LHK'
+        return admin_email_, admin_password_, branch_number_, admin_code_
+    else:
+        print('Wrong input!')
+        sys.exit()
+
+
+def start():
+    global driver
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.implicitly_wait(10)
 
 
 make_rand_number = '0123456789'
@@ -70,9 +92,24 @@ def name_generator():
     return name_gender, name_gender_
 
 
+def a():
+    if gender__ == 'Boy':
+        g = 'MALE'
+    else:
+        g = 'FEMALE'
+    return g
+
+
+# Ask user for cycle
+cycle = cycle_choice()
+# Start webdriver
+start()
 store_number = '1'
-LO_email = 'loii@sef.am'
-LO_password = 'Password2'
+admin_email = cycle[0]
+admin_password = cycle[1]
+branch_number = cycle[2]
+admin_code = cycle[3]
+
 LGL_email = 'testlo@sef.am'
 LGL_password = 'Password3'
 email_of_store = 'partner_selenium.py@python.py'
@@ -92,21 +129,13 @@ lastName_gen = random.choice(arm_surnames)
 arm_street = random.choice(arm_street_names)
 
 
-def a():
-    if gender__ == 'Boy':
-        g = 'MALE'
-    else:
-        g = 'FEMALE'
-    return g
-
-
 def add_potential_partner():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
-    login_email.send_keys(LO_email)
+    login_email.send_keys(admin_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
-    login_password.send_keys(LO_password)
+    login_password.send_keys(admin_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
@@ -128,7 +157,7 @@ def add_potential_partner():
     patronymic_fld = driver.find_element(By.CSS_SELECTOR, '[name="patronymic"]')
     patronymic_fld.send_keys(patronymic_gen)
     BR_number = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
-    BR_number.send_keys('e11', Keys.RETURN)
+    BR_number.send_keys(branch_number, Keys.RETURN)
     region = driver.find_element(By.XPATH, "(//span[@class='ant-select-selection-item'])[2]")
     region.click()
     region_yerevan = driver.find_element(By.XPATH, "(//div[contains(text(),'Երևան')])[1]")
@@ -184,9 +213,9 @@ def add_chain():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
-    login_email.send_keys(LO_email)
+    login_email.send_keys(admin_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
-    login_password.send_keys(LO_password)
+    login_password.send_keys(admin_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
@@ -222,7 +251,7 @@ def add_chain():
     bankAccountUsd = driver.find_element(By.CSS_SELECTOR, '[name="bankAccountUsd"]')
     bankAccountUsd.send_keys(generate_random_number(make_rand_number, 10))
     adminCode = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
-    adminCode.send_keys('LOII', Keys.RETURN)
+    adminCode.send_keys(admin_code, Keys.RETURN)
     bornDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[1]")
     bornDate.send_keys(born_date_of_store, Keys.RETURN)
     residency = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[2]")

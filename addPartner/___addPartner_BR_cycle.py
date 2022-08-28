@@ -41,8 +41,8 @@ png = path.abspath(path.join(path.dirname(__file__), '3.png'))
 main_file = path.abspath(path.join(path.dirname(__file__), '4.zip'))
 
 store_number = '1'
-LO_email = 'testbr@sef.am'
-LO_password = 'Password3'
+BR_email = 'testbr@sef.am'
+BR_password = 'Password3'
 LGL_email = 'testlo@sef.am'
 LGL_password = 'Password3'
 email_of_store = 'partner_selenium.py@python.py'
@@ -58,9 +58,9 @@ def add_potential_partner():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
-    login_email.send_keys(LO_email)
+    login_email.send_keys(BR_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
-    login_password.send_keys(LO_password)
+    login_password.send_keys(BR_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
@@ -138,9 +138,9 @@ def add_chain():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
-    login_email.send_keys(LO_email)
+    login_email.send_keys(BR_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
-    login_password.send_keys(LO_password)
+    login_password.send_keys(BR_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
