@@ -29,9 +29,7 @@ def green_banner(banner_xpath):
 def phone_number_banner_check():
     try:
         error_banner = driver.find_element(By.XPATH, "//div[@class='ant-message-notice-content']").text
-        check = str(error_banner) == \
-                'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա են հաճախորդի և գործընկերոջ հաշիվներ։' \
-                or str(error_banner) == 'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա է գործընկերոջ հաշիվ։'
+        check = str(error_banner) == 'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա են հաճախորդի և գործընկերոջ հաշիվներ։' or str(error_banner) == 'Դուք չեք կարող օգտագործել այս հեռախոսահամարը։ Տվյալ հեռախոսահամարով արդեն առկա է գործընկերոջ հաշիվ։'
         if check is True:
             print('Phone number exist, banner validation message is: ' + str(check))
         else:
@@ -43,7 +41,7 @@ def phone_number_banner_check():
 
 def check_field_empty_or_not(element):
     if len(element) == 0:
-        # print(f'{field} field is empty')
+        # print(f'{field} field is empty') must be improved
         print('Warning! field is empty')
     else:
         print(element)
@@ -53,8 +51,8 @@ PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 SUPM_email = 'supm@sef.am'
 SUPM_password = 'Password3'
-store_number_link = '6'
-store_number = '1'
+store_number_link = '1'
+store_number = '2'
 
 driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
 driver.maximize_window()
@@ -179,8 +177,8 @@ def linking_other_fields():
 
 
 def main():
-    # phone_number_case()
-    linking_other_fields()
+    phone_number_case()
+    # linking_other_fields()
 
 
 if __name__ == '__main__':

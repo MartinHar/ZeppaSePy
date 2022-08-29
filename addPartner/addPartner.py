@@ -34,10 +34,8 @@ def start():
     driver.implicitly_wait(10)
 
 
-make_rand_number = '0123456789'
-
-
-def generate_random_number(make_rand_number, n):
+def generate_random_number(n):
+    make_rand_number = '0123456789'
     return ''.join(random.choices(make_rand_number, k=n))
 
 
@@ -149,7 +147,7 @@ def add_potential_partner():
     legalName_fld = driver.find_element(By.CSS_SELECTOR, '[name="legalName"]')
     legalName_fld.send_keys(f"{firstName_gen} {lastName_gen} ԱՁ")
     taxCode_fld = driver.find_element(By.CSS_SELECTOR, '[name="taxCode"]')
-    taxCode_fld.send_keys(generate_random_number(make_rand_number, 8))
+    taxCode_fld.send_keys(generate_random_number(8))
     firstName_fld = driver.find_element(By.CSS_SELECTOR, '[name="firstName"]')
     firstName_fld.send_keys(firstName_gen)
     lastName_fld = driver.find_element(By.CSS_SELECTOR, '[name="lastName"]')
@@ -169,9 +167,9 @@ def add_potential_partner():
     address_str = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS.street"]')
     address_str.send_keys(arm_street)
     address_house = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS.houseNumber"]')
-    address_house.send_keys(generate_random_number(make_rand_number, 1))
+    address_house.send_keys(generate_random_number(1))
     address_apartment = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS.apartmentNumber"]')
-    address_apartment.send_keys(generate_random_number(make_rand_number, 2))
+    address_apartment.send_keys(generate_random_number(2))
     save_btn = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     save_btn.click()
 
@@ -231,9 +229,9 @@ def add_chain():
     reg_btn.click()
 
     phoneNumber = driver.find_element(By.CSS_SELECTOR, '[name="phoneNumber"]')
-    phoneNumber.send_keys(generate_random_number(make_rand_number, 8))
+    phoneNumber.send_keys(generate_random_number(8))
     contactNumber = driver.find_element(By.CSS_SELECTOR, '[name="contactNumber"]')
-    contactNumber.send_keys(generate_random_number(make_rand_number, 8))
+    contactNumber.send_keys(generate_random_number(8))
     contactEmail = driver.find_element(By.CSS_SELECTOR, '[name="contactEmail"]')
     contactEmail.send_keys(email_of_store)
     PE_radioBTN = driver.find_element(By.CSS_SELECTOR, '[value="PE"]')
@@ -247,9 +245,9 @@ def add_chain():
     emailAddr = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
     emailAddr.send_keys(email_of_store)
     bankAccount = driver.find_element(By.CSS_SELECTOR, '[name="bankAccount"]')
-    bankAccount.send_keys(generate_random_number(make_rand_number, 10))
+    bankAccount.send_keys(generate_random_number(10))
     bankAccountUsd = driver.find_element(By.CSS_SELECTOR, '[name="bankAccountUsd"]')
-    bankAccountUsd.send_keys(generate_random_number(make_rand_number, 10))
+    bankAccountUsd.send_keys(generate_random_number(10))
     adminCode = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
     adminCode.send_keys(admin_code, Keys.RETURN)
     bornDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[1]")
@@ -263,23 +261,23 @@ def add_chain():
     childrenCount = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[4]")
     childrenCount.send_keys('1', Keys.RETURN)
     socialCard = driver.find_element(By.CSS_SELECTOR, '[name="socialCard"]')
-    socialCard.send_keys(generate_random_number(make_rand_number, 10))
+    socialCard.send_keys(generate_random_number(10))
     socialCardIssueDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[2]")
     socialCardIssueDate.send_keys(social_card_issue_date)
     passport = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[5]")
     passport.send_keys('ՀՀ նույնականացման քարտ', Keys.RETURN)
     passportID = driver.find_element(By.CSS_SELECTOR, '[name="passportId"]')
-    passportID.send_keys(generate_random_number('se' + make_rand_number, 5))
+    passportID.send_keys('se' + generate_random_number(5))
     issuingAuthority = driver.find_element(By.CSS_SELECTOR, '[name="issuingAuthority"]')
-    issuingAuthority.send_keys(generate_random_number(make_rand_number, 3))
+    issuingAuthority.send_keys(generate_random_number(3))
     passportIssueDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[3]")
     passportIssueDate.send_keys(passport_issue_date, Keys.RETURN)
     passportExpDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[4]")
     passportExpDate.send_keys(passport_exp_date, Keys.RETURN)
     regNumber = driver.find_element(By.CSS_SELECTOR, '[name="stateRegistrationNumber"]')
-    regNumber.send_keys('sel.' + generate_random_number(make_rand_number, 4))
+    regNumber.send_keys('sel.' + generate_random_number(4))
     regNumberForPE = driver.find_element(By.CSS_SELECTOR, '[name="registrationNumberForPE"]')
-    regNumberForPE.send_keys('sel.' + generate_random_number(make_rand_number, 4))
+    regNumberForPE.send_keys('sel.' + generate_random_number(4))
     PEIssueD = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[5]")
     PEIssueD.send_keys(PE_issue_day, Keys.RETURN)
     productCheckbox = driver.find_element(By.XPATH, "(//input[@name='addressDTOS[0].productChecked'])[1]")
@@ -306,4 +304,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

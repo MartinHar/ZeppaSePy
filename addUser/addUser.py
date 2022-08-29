@@ -57,29 +57,23 @@ def name_generator():
     return name_gender, name_gender_
 
 
-make_eng_word = 'abcdefg'
-
-
-def generate_random_eng_word(make_eng_word, n):
+def generate_random_eng_word(n):
+    make_eng_word = 'abcdefg'
     return ''.join(random.choices(make_eng_word, k=n))
 
 
-make_rand_number = '0123456789'
-
-
-def generate_random_number(make_rand_number, n):
+def generate_random_number(n):
+    make_rand_number = '0123456789'
     return ''.join(random.choices(make_rand_number, k=n))
 
 
-make_arm_word = 'աբգդեզէ'
-
-
-def generate_random_arm_word(make_arm_word, n):
+def generate_random_arm_word(n):
+    make_arm_word = 'աբգդեզէ'
     return ''.join(random.choices(make_arm_word, k=n))
 
 
 def add_user_from_swagger():
-    phone_number = generate_random_number(make_rand_number, 8)
+    phone_number = generate_random_number(8)
     eng_first_name = names.get_first_name()
     eng_last_name = names.get_last_name()
     nickname = f'{eng_first_name}.{eng_last_name}'
@@ -118,10 +112,10 @@ def user_verification():
     passport_issue_date = '01-12-2020'
     passport_exp_date = '01-01-2035'
     email_address = 'user_selenium.py@python.py'
-    passportID = generate_random_eng_word(make_eng_word, 2) + generate_random_number(make_rand_number, 4)
+    passportID = generate_random_eng_word(2) + generate_random_number(4)
     user_street_adr = random.choice(arm_street_names) + ' 1 / -'
-    user_house_num = generate_random_arm_word(make_arm_word, 1) + '1/-'
-    user_apt_num = generate_random_arm_word(make_arm_word, 1) + '1/-'
+    user_house_num = generate_random_arm_word(1) + '1/-'
+    user_apt_num = generate_random_arm_word(1) + '1/-'
     # main_file = path.abspath(path.join(path.dirname(__file__), 'mainFile.zip'))           #need to be automated ...
     name_generator_ = name_generator()
     firstName_gen = name_generator_[0]
@@ -166,9 +160,9 @@ def user_verification():
     children = driver.find_element(By.XPATH, "(//input[@role='combobox'])[6]")
     children.send_keys('1', Keys.RETURN)
     asCliCode = driver.find_element(By.XPATH, "//input[@name='asCliCode']")
-    asCliCode.send_keys(generate_random_number(make_rand_number, 8))
+    asCliCode.send_keys(generate_random_number(8))
     asAccountNumber = driver.find_element(By.XPATH, "//input[@name='asAccountNumber']")
-    asAccountNumber.send_keys(generate_random_number(make_rand_number, 11))
+    asAccountNumber.send_keys(generate_random_number(11))
     first_name = driver.find_element(By.CSS_SELECTOR, '[name="firstName"]')
     first_name.send_keys(firstName_gen)
     last_name = driver.find_element(By.CSS_SELECTOR, '[name="lastName"]')
@@ -178,7 +172,7 @@ def user_verification():
     gender = driver.find_element(By.CSS_SELECTOR, f'[value="{a()}"]')
     gender.click()
     socialCard = driver.find_element(By.CSS_SELECTOR, '[name="socialCard"]')
-    socialCard.send_keys(generate_random_number(make_rand_number, 10))
+    socialCard.send_keys(generate_random_number(10))
     socialCardDate = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[4]")
     socialCardDate.send_keys(social_card_issue_date, Keys.RETURN)
     user_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -188,7 +182,7 @@ def user_verification():
     user_passportID = driver.find_element(By.CSS_SELECTOR, '[name="passportId"]')
     user_passportID.send_keys(passportID)
     p_issuingAuthority = driver.find_element(By.CSS_SELECTOR, '[name="issuingAuthority"]')
-    p_issuingAuthority.send_keys(generate_random_number(make_rand_number, 3))
+    p_issuingAuthority.send_keys(generate_random_number(3))
     p_issue_date = driver.find_element(By.XPATH, "(//input[contains(@placeholder,'Select date')])[2]")
     p_issue_date.send_keys(passport_issue_date)
     p_exp_date = driver.find_element(By.XPATH, "(//input[contains(@placeholder,'Select date')])[3]")
