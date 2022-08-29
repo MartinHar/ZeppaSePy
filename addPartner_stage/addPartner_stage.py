@@ -39,10 +39,10 @@ def generate_random_number(n):
     return ''.join(random.choices(make_rand_number, k=n))
 
 
-jpg = path.abspath(path.join(path.dirname(__file__), '1.jpg'))
-pdf = path.abspath(path.join(path.dirname(__file__), '2.pdf'))
-png = path.abspath(path.join(path.dirname(__file__), '3.png'))
-main_file = path.abspath(path.join(path.dirname(__file__), '4.zip'))
+jpg = path.abspath(path.join(path.dirname(__file__), '../addPartner/1.jpg'))
+pdf = path.abspath(path.join(path.dirname(__file__), '../addPartner/2.pdf'))
+png = path.abspath(path.join(path.dirname(__file__), '../addPartner/3.png'))
+main_file = path.abspath(path.join(path.dirname(__file__), '../addPartner/4.zip'))
 
 arm_street_names = ['Աբելյան', 'Աբովյան', 'Ագաթանգեղոսի', 'Ազատամարտիկների', 'Ազատության պողոտա', 'Աթենքի',
                     'Աթոյան', 'Ալեք Մանուկյան', 'Ալիխանյան', 'Աղայան', 'Աղյուսագործների', 'Ամիրյան', 'Այասի',
