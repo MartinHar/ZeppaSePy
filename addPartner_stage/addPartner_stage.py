@@ -6,7 +6,8 @@ from selenium.webdriver.common.keys import Keys
 import random
 import names
 import sys
-from os import path
+import os
+# from os import path
 
 
 def cycle_choice():
@@ -39,10 +40,25 @@ def generate_random_number(n):
     return ''.join(random.choices(make_rand_number, k=n))
 
 
-jpg = path.abspath(path.join(path.dirname(__file__), '../addPartner/1.jpg'))
-pdf = path.abspath(path.join(path.dirname(__file__), '../addPartner/2.pdf'))
-png = path.abspath(path.join(path.dirname(__file__), '../addPartner/3.png'))
-main_file = path.abspath(path.join(path.dirname(__file__), '../addPartner/4.zip'))
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
+jpg = resource_path('1.jpg')
+pdf = resource_path('2.pdf')
+png = resource_path('3.png')
+main_file = resource_path('4.zip')
+# jpg = path.abspath(path.join(path.dirname(__file__), '../addPartner/1.jpg'))
+# pdf = path.abspath(path.join(path.dirname(__file__), '../addPartner/2.pdf'))
+# png = path.abspath(path.join(path.dirname(__file__), '../addPartner/3.png'))
+# main_file = path.abspath(path.join(path.dirname(__file__), '../addPartner/4.zip'))
 
 arm_street_names = ['Աբելյան', 'Աբովյան', 'Ագաթանգեղոսի', 'Ազատամարտիկների', 'Ազատության պողոտա', 'Աթենքի',
                     'Աթոյան', 'Ալեք Մանուկյան', 'Ալիխանյան', 'Աղայան', 'Աղյուսագործների', 'Ամիրյան', 'Այասի',
