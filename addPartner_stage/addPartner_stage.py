@@ -7,7 +7,7 @@ import random
 import names
 import sys
 import os
-# from os import path
+from os import path
 
 
 def cycle_choice():
@@ -51,14 +51,14 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-jpg = resource_path('1.jpg')
-pdf = resource_path('2.pdf')
-png = resource_path('3.png')
-main_file = resource_path('4.zip')
-# jpg = path.abspath(path.join(path.dirname(__file__), '../addPartner/1.jpg'))
-# pdf = path.abspath(path.join(path.dirname(__file__), '../addPartner/2.pdf'))
-# png = path.abspath(path.join(path.dirname(__file__), '../addPartner/3.png'))
-# main_file = path.abspath(path.join(path.dirname(__file__), '../addPartner/4.zip'))
+# jpg = resource_path('1.jpg')
+# pdf = resource_path('2.pdf')
+# png = resource_path('3.png')
+# main_file = resource_path('4.zip')
+jpg = path.abspath(path.join(path.dirname(__file__), '1.jpg'))
+pdf = path.abspath(path.join(path.dirname(__file__), '../addPartner/2.pdf'))
+png = path.abspath(path.join(path.dirname(__file__), '../addPartner/3.png'))
+main_file = path.abspath(path.join(path.dirname(__file__), '../addPartner/4.zip'))
 
 arm_street_names = ['Աբելյան', 'Աբովյան', 'Ագաթանգեղոսի', 'Ազատամարտիկների', 'Ազատության պողոտա', 'Աթենքի',
                     'Աթոյան', 'Ալեք Մանուկյան', 'Ալիխանյան', 'Աղայան', 'Աղյուսագործների', 'Ամիրյան', 'Այասի',
@@ -314,8 +314,8 @@ def add_chain():
 
 def main():
     add_potential_partner()
-    filtering_potential_partner()
-    add_chain()
+    # filtering_potential_partner()
+    # add_chain()
 
 
 if __name__ == '__main__':

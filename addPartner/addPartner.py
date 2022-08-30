@@ -195,13 +195,13 @@ def filtering_potential_partner():
     filterPartner.click()
     comment_ = driver.find_element(By.CSS_SELECTOR, '[name="decisionFeedback"]')
     comment_.send_keys(comment)
-    uploadFile_1 = driver.find_element(By.XPATH, "(//input[contains(@type,'file')])[1]")
+    uploadFile_1 = driver.find_element(By.XPATH, "(//input[@type='file'])[1]")
     uploadFile_1.send_keys(jpg)
-    uploadFile_2 = driver.find_element(By.XPATH, "(//input[contains(@type,'file')])[2]")
+    uploadFile_2 = driver.find_element(By.XPATH, "(//input[@type='file'])[2]")
     uploadFile_2.send_keys(pdf)
-    uploadFile_3 = driver.find_element(By.XPATH, "(//input[contains(@type,'file')])[3]")
+    uploadFile_3 = driver.find_element(By.XPATH, "(//input[@type='file'])[3]")
     uploadFile_3.send_keys(png)
-    uploadFile_4 = driver.find_element(By.XPATH, "(//input[contains(@type,'file')])[4]")
+    uploadFile_4 = driver.find_element(By.XPATH, "(//input[@type='file'])[4]")
     uploadFile_4.send_keys(jpg)
     save_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     save_button.click()
@@ -290,16 +290,15 @@ def add_chain():
     serviceSelect.send_keys('Այս գարուն', Keys.RETURN)
     sameCheckbox = driver.find_element(By.XPATH, "//span[contains(text(),'Նույնն է')]")
     sameCheckbox.click()
-    attachZIP = driver.find_element(By.XPATH, "//input[@type='file']")
-    attachZIP.send_keys(main_file)
+    driver.find_element(By.XPATH, "//input[@type='file']").send_keys(main_file)
     # saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     # saveBTN.click()
 
 
 def main():
     add_potential_partner()
-    filtering_potential_partner()
-    add_chain()
+    # filtering_potential_partner()
+    # add_chain()
 
 
 if __name__ == '__main__':

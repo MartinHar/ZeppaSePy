@@ -142,7 +142,7 @@ def user_verification():
     login_password.send_keys(LO_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
-    user = driver.find_element(By.XPATH, "(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[1]")
+    user = driver.find_element(By.XPATH, "(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[4]")
     user.click()
     time.sleep(1)
     verification_page = driver.find_element(By.XPATH, "//div[contains(text(),'Վավերացում')]")
@@ -213,7 +213,7 @@ def user_verification():
 
 
 def main():
-    add_user_from_swagger()
+    # add_user_from_swagger()
     user_verification()
 
 
