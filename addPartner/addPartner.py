@@ -125,6 +125,7 @@ gender__ = name_generator_[1]
 patronymic_gen = random.choice(arm_boy_name)
 lastName_gen = random.choice(arm_surnames)
 arm_street = random.choice(arm_street_names)
+arm_street_director = random.choice(arm_street_names)
 
 
 def add_potential_partner():
@@ -165,7 +166,7 @@ def add_potential_partner():
     c_v_c_center = driver.find_element(By.XPATH, "(//div[contains(text(),'Կենտրոն')])[1]")
     c_v_c_center.click()
     address_str = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS.street"]')
-    address_str.send_keys(arm_street)
+    address_str.send_keys(f'{arm_street} {generate_random_number(1)}')
     address_house = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS.houseNumber"]')
     address_house.send_keys(generate_random_number(1))
     address_apartment = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS.apartmentNumber"]')
@@ -280,15 +281,29 @@ def add_chain():
     regNumberForPE.send_keys('sel.' + generate_random_number(4))
     PEIssueD = driver.find_element(By.XPATH, "(//input[@placeholder='Select date'])[5]")
     PEIssueD.send_keys(PE_issue_day, Keys.RETURN)
-    productCheckbox = driver.find_element(By.XPATH, "(//input[@name='addressDTOS[0].productChecked'])[1]")
+    director_region = driver.find_element(By.XPATH, "(//span[contains(@class,'ant-select-selection-item')])[6]")
+    director_region.click()
+    director_region_shirak = driver.find_element(By.XPATH, "//div[contains(@title,'Շիրակ')]")
+    director_region_shirak.click()
+    director_c_v_c = driver.find_element(By.XPATH, "(//span[contains(@class,'ant-select-selection-item')])[7]")
+    director_c_v_c.click()
+    director_c_v_c_gyumri = driver.find_element(By.XPATH, "//div[contains(text(),'Գյումրի')]")
+    director_c_v_c_gyumri.click()
+    director_street = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS[0].street"]')
+    director_street.send_keys(f'{arm_street_director} {generate_random_number(1)}')
+    director_house = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS[0].houseNumber"]')
+    director_house.send_keys(generate_random_number(2))
+    director_apt = driver.find_element(By.CSS_SELECTOR, '[name="addressDTOS[0].apartmentNumber"]')
+    director_apt.send_keys(generate_random_number(2))
+    productCheckbox = driver.find_element(By.XPATH, "(//input[@name='addressDTOS[1].productChecked'])")
     productCheckbox.click()
-    productSelect = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[8]")
+    productSelect = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[10]")
     productSelect.send_keys('Ապրանք - Մթերք', Keys.RETURN)
-    serviceCheckbox = driver.find_element(By.XPATH, "(//input[contains(@name,'addressDTOS[0].serviceChecked')])[1]")
+    serviceCheckbox = driver.find_element(By.XPATH, "(//input[@name='addressDTOS[1].serviceChecked'])")
     serviceCheckbox.click()
-    serviceSelect = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[8]")
+    serviceSelect = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[10]")
     serviceSelect.send_keys('Այս գարուն', Keys.RETURN)
-    sameCheckbox = driver.find_element(By.XPATH, "//span[contains(text(),'Նույնն է')]")
+    sameCheckbox = driver.find_element(By.XPATH, "//input[@class='ant-checkbox-input']")
     sameCheckbox.click()
     driver.find_element(By.XPATH, "//input[@type='file']").send_keys(main_file)
     # saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
@@ -297,8 +312,8 @@ def add_chain():
 
 def main():
     add_potential_partner()
-    # filtering_potential_partner()
-    # add_chain()
+    filtering_potential_partner()
+    add_chain()
 
 
 if __name__ == '__main__':

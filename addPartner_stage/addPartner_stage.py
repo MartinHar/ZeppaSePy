@@ -304,7 +304,7 @@ def add_chain():
     serviceCheckbox.click()
     serviceSelect = driver.find_element(By.XPATH, "(//input[contains(@role,'combobox')])[8]")
     serviceSelect.send_keys('Ծառայություն - Այլ', Keys.RETURN)
-    sameCheckbox = driver.find_element(By.XPATH, "//span[contains(text(),'Նույնն է')]")
+    sameCheckbox = driver.find_element(By.XPATH, "//input[@class='ant-checkbox-input']")
     sameCheckbox.click()
     driver.find_element(By.XPATH, "//input[@type='file']").send_keys(main_file)
     # saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')

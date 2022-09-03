@@ -178,7 +178,7 @@ def linking_other_fields():
 
 def main():
     phone_number_case()
-    # linking_other_fields()
+    linking_other_fields()
 
 
 if __name__ == '__main__':
