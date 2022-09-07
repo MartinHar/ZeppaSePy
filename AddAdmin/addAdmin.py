@@ -38,8 +38,8 @@ def generate_random_number(make_rand_number, n):
 
 SUPM_email = 'supm@sef.am'
 SUPM_password = 'Password3'
-admin_role = 'ԻԾ'
-branch_code = 'S93'
+admin_role = 'ՎՄ'
+branch_code = 'E11'
 password = 'Password1'
 fixed_passport_start_date = '01-01-2020'
 fixed_passport_end_date = '01-01-2030'
