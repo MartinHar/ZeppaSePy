@@ -160,7 +160,7 @@ def linking_other_fields():
         driver.implicitly_wait(2)
         link_btn = driver.find_element(By.XPATH, "//div[@class='ant-modal-footer']//button[@type='submit']")
         link_btn.click()
-    except:
+    except Exception:
         print('WARNING: Փոխկապակցել popup is not located\n')
     # CHECK STORE IS ACTIVATED OR NOT
     if len(asCliCode) == 0 and len(asAccountNumber) == 0:

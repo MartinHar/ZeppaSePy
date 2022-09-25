@@ -3,7 +3,11 @@ import names
 import random
 import os
 import sys
+from faker import Faker
 
+# fake = Faker('hy_AM')
+# for _ in range(10):
+#     print(fake.first_name_male())
 # for i in range(1):
 #     print(names.get_full_name())
 # #
@@ -19,4 +23,5 @@ import sys
 
 ## index in loop (idx = index)
 # for idx, i in enumerate(arm_street_names):
+
 

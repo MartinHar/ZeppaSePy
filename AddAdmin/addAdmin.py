@@ -1,6 +1,8 @@
 import sys
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.support.select import Select
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -37,7 +39,7 @@ def generate_random_number(make_rand_number, n):
 
 
 SUPM_email = 'supm@sef.am'
-SUPM_password = 'Password3'
+SUPM_password = 'Password2'
 admin_role = 'ՎՄ'
 branch_code = 'E11'
 password = 'Password1'
@@ -55,17 +57,24 @@ def add_admin():
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
+    # settings_menu = driver.find_element(By.XPATH, "//span[contains(text(),'Կարգավորումներ')]")
+    # settings_menu.click()
     settings_menu = driver.find_element(By.XPATH, "//span[contains(text(),'Կարգավորումներ')]")
-    settings_menu.click()
+    action = ActionChains(driver)
+    action.move_to_element(settings_menu).perform()
+
     roles_menu = driver.find_element(By.XPATH, "//a[contains(text(),'Դերեր')]")
     roles_menu.click()
 
     add_admin_btn = driver.find_element(By.XPATH, "//button[@class='ant-btn ant-btn-primary addNewAdmin']")
     add_admin_btn.click()
-    admin = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
-    admin.send_keys(admin_role, Keys.RETURN)
-    branch = driver.find_element(By.XPATH, "(//input[@role='combobox'])[2]")
-    branch.send_keys(branch_code, Keys.RETURN)
+    # admin = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
+    # admin.send_keys(admin_role, Keys.RETURN)
+    # branch = driver.find_element(By.XPATH, "(//input[@role='combobox'])[2]")
+    # branch.send_keys(branch_code, Keys.RETURN)
+    admin = driver.find_element(By.XPATH, "//form/div[1]/div[2]")
+    dropdown = Select(admin)
+    dropdown.select_by_visible_text('ՎՄ')
     admin_code = driver.find_element(By.CSS_SELECTOR, "[name='adminCode']")
     admin_code.send_keys("AUT"+generate_random_eng_word(make_eng_word, 4))
     asUserCode = driver.find_element(By.CSS_SELECTOR, "[name='asUserCode']")

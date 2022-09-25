@@ -312,9 +312,9 @@ def add_chain():
 
 
 def main():
-    add_potential_partner()
-    # filtering_potential_partner()
-    # add_chain()
+    # add_potential_partner()
+    filtering_potential_partner()
+    add_chain()
 
 
 if __name__ == '__main__':
