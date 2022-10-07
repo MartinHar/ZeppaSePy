@@ -21,7 +21,12 @@ from faker import Faker
 #
 # print(convert(str1))
 
-## index in loop (idx = index)
+# index in loop (id = index)
 # for idx, i in enumerate(arm_street_names):
-
-
+# from faker import Faker
+# faker = Faker(['hy_AM'])
+#
+# for _ in range(10):
+#     print(faker.image_url())
+#
+# print(faker.license_plate())

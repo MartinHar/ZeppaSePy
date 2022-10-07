@@ -121,7 +121,7 @@ def user_verification():
     firstName_gen = name_generator_[0]
     gender__ = name_generator_[1]
     LO_email = 'loii@sef.am'
-    LO_password = 'Password2'
+    LO_password = 'Password3'
 
     def a():
         if gender__ == 'Boy':

@@ -26,7 +26,7 @@ def cycle_choice():
         return admin_email_, admin_password_, branch_number_, admin_code_
     else:
         print('Wrong input!')
-        sys.exit()
+        return cycle_choice()
 
 
 def start():
@@ -312,7 +312,7 @@ def add_chain():
 
 
 def main():
-    # add_potential_partner()
+    add_potential_partner()
     filtering_potential_partner()
     add_chain()
 

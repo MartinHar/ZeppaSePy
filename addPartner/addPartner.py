@@ -13,7 +13,7 @@ def cycle_choice():
     user_choice = input("Please choose admin cycle, for LO type 1 , for BR press 2: ")
     if user_choice == '1':
         admin_email_ = 'loii@sef.am'
-        admin_password_ = 'Password2'
+        admin_password_ = 'Password3'
         branch_number_ = 'E11'
         admin_code_ = 'LOII'
         return admin_email_, admin_password_, branch_number_, admin_code_
@@ -311,8 +311,8 @@ def add_chain():
 
 
 def main():
-    add_potential_partner()
-    filtering_potential_partner()
+    # add_potential_partner()
+    # filtering_potential_partner()
     add_chain()
 
 
