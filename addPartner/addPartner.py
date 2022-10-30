@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -5,7 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import random
 import names
-import sys
 from os import path
 
 
@@ -14,6 +15,8 @@ def cycle_choice():
     if user_choice == '1':
         admin_email_ = 'loii@sef.am'
         admin_password_ = 'Password3'
+        # admin_email_ = 'supm@sef.am'
+        # admin_password_ = 'Password2'
         branch_number_ = 'E11'
         admin_code_ = 'LOII'
         return admin_email_, admin_password_, branch_number_, admin_code_
@@ -25,13 +28,19 @@ def cycle_choice():
         return admin_email_, admin_password_, branch_number_, admin_code_
     else:
         print('Wrong input!')
-        sys.exit()
+        return cycle_choice()
 
 
 def start():
     global driver
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.implicitly_wait(10)
+    print(driver.title)
+    print(driver.name)
+
+# def start():
+#     global driver
+#     driver = webdriver.Chrome('/Users/martinharutyunyan/Desktop/ZeppaAutomation/chromedriver')
 
 
 def generate_random_number(n):
@@ -173,6 +182,8 @@ def add_potential_partner():
     address_apartment.send_keys(generate_random_number(2))
     save_btn = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     save_btn.click()
+    time.sleep(2)
+
 
 
 def filtering_potential_partner():
@@ -206,9 +217,12 @@ def filtering_potential_partner():
     uploadFile_4.send_keys(jpg)
     save_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     save_button.click()
+    time.sleep(2)
 
 
 def add_chain():
+    print(driver.title)
+    print(driver.name)
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -311,8 +325,8 @@ def add_chain():
 
 
 def main():
-    # add_potential_partner()
-    # filtering_potential_partner()
+    add_potential_partner()
+    filtering_potential_partner()
     add_chain()
 
 

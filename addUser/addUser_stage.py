@@ -162,7 +162,7 @@ def user_verification():
 
 
 def main():
-    # add_user_from_swagger()
+    add_user_from_swagger()
     user_verification()
 
 

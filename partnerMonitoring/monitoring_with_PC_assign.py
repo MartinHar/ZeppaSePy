@@ -5,13 +5,53 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.common.keys import Keys
 
 store_number = input('Enter store location number from partners list: ')
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-driver.implicitly_wait(10)
+
+
+def start_webdriver():
+    global driver
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.implicitly_wait(10)
+
+
+def cycle_choice():
+    user_choice = input('Please choose admin cycle, for LO type 1 , for BR press 2: ')
+    if user_choice == '1':
+        admin_email_ = 'loii@sef.am'
+        admin_password_ = 'Password3'
+        # admin_email_ = 'supm@sef.am'
+        # admin_password_ = 'Password2'
+        BM_email = 'mj11@sef.am'
+        BM_password = 'Password1'
+        admin_code_ = 'LOIII'
+        return admin_email_, admin_password_, BM_email, BM_password, admin_code_
+
+    elif user_choice == '2':
+        admin_email_ = 'testbr@sef.am'
+        admin_password_ = 'Password3'
+        # admin_email_ = 'supm@sef.am'
+        # admin_password_ = 'Password2'
+        SALES_email = 'spd@sef.am'
+        SALES_password = 'Password1'
+        admin_code_ = 'LHK'
+        return admin_email_, admin_password_, SALES_email, SALES_password, admin_code_
+    else:
+        print('Wrong input!')
+        return cycle_choice()
+
+
+cycle = cycle_choice()
+admin_email = cycle[0]
+admin_password = cycle[1]
+second_admin_email = cycle[2]
+second_admin_password = cycle[3]
+admin_code = cycle[4]
+PC_email = 'pcpc@sef.am'
+PC_password = 'Password1'
 
 
 def generate_random_arm_word(make_arm_word, n):
@@ -41,13 +81,6 @@ def as_codes():
         print('WARNING!: ՀԾ հաճախորդի կոդ and ՀԾ հաշվի համար fields are missing')
 
 
-BM_email = 'mj11@sef.am'
-BM_password = 'Password1'
-PC_email = 'pcpc@sef.am'
-PC_password = 'Password1'
-LO_email = 'loii@sef.am'
-LO_password = 'Password2'
-
 threeMonthsCashMoneyCirculation = '5000000'
 threeMonthsNonCashMoneyCirculation = '2000000'
 seasonCirculation = '123000000-230000000'
@@ -57,19 +90,20 @@ maxLoanAmount = '10000000'
 additionalInfo = 'Lorem ipsum dolor sit amet, Римский император Константин I Великий, Լոռեմ իպսում դոլոր սիթ ամետ'
 
 
-def lo_cycle():
+def admin_cycle():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
-    login_email.send_keys(LO_email)
+    login_email.send_keys(admin_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
-    login_password.send_keys(LO_password)
+    login_password.send_keys(admin_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    time.sleep(1)
+    Partner = driver.find_element(By.XPATH, f"//tbody/tr[{int(store_number)+1}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -96,19 +130,20 @@ def lo_cycle():
     save_btn.click()
 
 
-def bm_cycle():
+def second_admin_cycle():
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
-    login_email.send_keys(BM_email)
+    login_email.send_keys(second_admin_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
-    login_password.send_keys(BM_password)
+    login_password.send_keys(second_admin_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    time.sleep(1)
+    Partner = driver.find_element(By.XPATH, f"//tbody/tr[{int(store_number)+1}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -131,7 +166,8 @@ def pc_assign():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    time.sleep(1)
+    Partner = driver.find_element(By.XPATH, f"//tbody/tr[{int(store_number)+1}]")
     Partner.click()
 
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
@@ -142,8 +178,9 @@ def pc_assign():
     adm = driver.find_element(By.XPATH, "//div[@class='ant-select-selector']")
     adm.click()
     time.sleep(1)
-    s_admin = driver.find_element(By.XPATH, "//div[contains(@title,'LOIII - լօօի լօիիյ')]//div[1]")
-    s_admin.click()
+    select_admin = driver.find_element(By.XPATH, "//input[@role='combobox']")
+    # select_admin.click()
+    select_admin.send_keys(admin_code, Keys.RETURN)
     assign_comment = driver.find_element(By.XPATH, "//div[@class='ant-modal-body']//textarea[@class='ant-input']")
     assign_comment.send_keys(additionalInfo)
     assign_btn = driver.find_element(By.XPATH, "//div[@class='ant-modal-footer']//button[@type='button'][contains(text(),'Հանձնարարել')]")
@@ -151,20 +188,21 @@ def pc_assign():
     time.sleep(2)
 
 
-def lo_approval():
+def admin_approval():
 
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
-    login_email.send_keys(LO_email)
+    login_email.send_keys(admin_email)
     login_password = driver.find_element(By.CSS_SELECTOR, '[name="password"]')
-    login_password.send_keys(LO_password)
+    login_password.send_keys(admin_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    time.sleep(1)
+    Partner = driver.find_element(By.XPATH, f"//tbody/tr[{int(store_number)+1}]")
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
@@ -185,7 +223,8 @@ def pc_approval():
 
     partners_tab = driver.find_element(By.XPATH, "//a[.='Գործընկերներ']")
     partners_tab.click()
-    Partner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[{store_number}]")
+    time.sleep(1)
+    Partner = driver.find_element(By.XPATH, f"//tbody/tr[{int(store_number)+1}]")
     Partner.click()
     monitoring_page = driver.find_element(By.XPATH, "//div[contains(text(),'Մոնիթորինգ')]")
     monitoring_page.click()
@@ -200,10 +239,11 @@ def pc_approval():
 
 
 def main():
-    lo_cycle()
-    bm_cycle()
+    start_webdriver()
+    admin_cycle()
+    second_admin_cycle()
     pc_assign()
-    lo_approval()
+    admin_approval()
     pc_approval()
 
 

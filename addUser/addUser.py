@@ -113,9 +113,9 @@ def user_verification():
     passport_exp_date = '01-01-2035'
     email_address = 'user_selenium.py@python.py'
     passportID = generate_random_eng_word(2) + generate_random_number(4)
-    user_street_adr = random.choice(arm_street_names) + ' 1 / -'
-    user_house_num = generate_random_arm_word(1) + '1/-'
-    user_apt_num = generate_random_arm_word(1) + '1/-'
+    user_street_adr = random.choice(arm_street_names) + ' ./-'
+    user_house_num = generate_random_arm_word(1) + '1/- ա'
+    user_apt_num = generate_random_arm_word(1) + '1/- բն'
     # main_file = path.abspath(path.join(path.dirname(__file__), 'mainFile.zip'))           #need to be automated ...
     name_generator_ = name_generator()
     firstName_gen = name_generator_[0]

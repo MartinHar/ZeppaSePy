@@ -50,9 +50,9 @@ def check_field_empty_or_not(element):
 PC_email = 'pcpc@sef.am'
 PC_password = 'Password1'
 SUPM_email = 'supm@sef.am'
-SUPM_password = 'Password3'
-store_number_link = '1'
-store_number = '2'
+SUPM_password = 'Password2'
+store_number_link = '2'
+store_number = '3'
 
 driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
 driver.maximize_window()
