@@ -1,4 +1,5 @@
 import time
+from os import path
 import names
 import requests
 from selenium import webdriver
@@ -8,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import random
 import sys
-# from os import path
+
 
 arm_surnames = ['Հովհաննիսյան', 'Սարգսյան', 'Գրիգորյան', 'Հարությունյան', 'Գրիգորյան', 'Սարիբեկյան', 'Խաչատրյան',
                 'Ադամյան', 'Խաչատուրյան', 'Հակոբյան', 'Պետրոսյան', 'Կարապետյան', 'Գևորգյան',
@@ -116,12 +117,12 @@ def user_verification():
     user_street_adr = random.choice(arm_street_names) + ' ./-'
     user_house_num = generate_random_arm_word(1) + '1/- ա'
     user_apt_num = generate_random_arm_word(1) + '1/- բն'
-    # main_file = path.abspath(path.join(path.dirname(__file__), 'mainFile.zip'))           #need to be automated ...
     name_generator_ = name_generator()
     firstName_gen = name_generator_[0]
     gender__ = name_generator_[1]
     LO_email = 'loii@sef.am'
     LO_password = 'Password3'
+    main_file = path.abspath(path.join(path.dirname(__file__), '4.zip'))
 
     def a():
         if gender__ == 'Boy':
@@ -204,16 +205,19 @@ def user_verification():
     upload_mainFile_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Ընտրել ֆայլ')]")
     upload_mainFile_btn.click()
     time.sleep(1)
-    upload_mainFile_rd = driver.find_element(By.XPATH, "(//span[@class='ant-radio'])[2]")
+    upload_mainFile_rd = driver.find_element(By.XPATH, "//input[@value='USER_MAIN_DOCUMENT']")
     upload_mainFile_rd.click()
     time.sleep(1)
-    next_btn = driver.find_element(By.XPATH, "//button[contains(text(),'Հաջորդ')]")
-    next_btn.click()
-    time.sleep(2000)
+    input_file = driver.find_element(By.XPATH, "//input[@type='file']")
+    input_file.send_keys(main_file)
+    time.sleep(2)
+    close_popup = driver.find_element(By.XPATH, "//button[@aria-label='Close']")
+    close_popup.click()
+    time.sleep(50)  # need to be improved , without this page is closing after close_pupup is executed
 
 
 def main():
-    # add_user_from_swagger()
+    add_user_from_swagger()
     user_verification()
 
 
