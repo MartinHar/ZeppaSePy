@@ -106,6 +106,12 @@ def add_user_from_swagger():
         sys.exit()
 
 
+def start_webdriver():
+    global driver
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    driver.implicitly_wait(10)
+
+
 def user_verification():
 
     born_date_of_user = '01-01-1999'
@@ -131,8 +137,7 @@ def user_verification():
             g = 'FEMALE'
         return g
 
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    driver.implicitly_wait(10)
+    start_webdriver()
 
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
@@ -143,7 +148,7 @@ def user_verification():
     login_password.send_keys(LO_password)
     login_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     login_button.click()
-    user = driver.find_element(By.XPATH, "(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[1]")
+    user = driver.find_element(By.XPATH, "(//tr[@class='ant-table-row ant-table-row-level-0 users-table-row'])[2]")
     user.click()
     time.sleep(1)
     verification_page = driver.find_element(By.XPATH, "//div[contains(text(),'Վավերացում')]")
@@ -213,11 +218,10 @@ def user_verification():
     time.sleep(2)
     close_popup = driver.find_element(By.XPATH, "//button[@aria-label='Close']")
     close_popup.click()
-    time.sleep(50)  # need to be improved , without this page is closing after close_pupup is executed
 
 
 def main():
-    add_user_from_swagger()
+    # add_user_from_swagger()
     user_verification()
 
 

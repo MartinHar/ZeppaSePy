@@ -36,7 +36,7 @@ def cycle_choice():
         # admin_email_ = 'supm@sef.am'
         # admin_password_ = 'Password2'
         SALES_email = 'spd@sef.am'
-        SALES_password = 'Password1'
+        SALES_password = 'Password2'
         admin_code_ = 'LHK'
         return admin_email_, admin_password_, SALES_email, SALES_password, admin_code_
     else:
@@ -51,7 +51,7 @@ second_admin_email = cycle[2]
 second_admin_password = cycle[3]
 admin_code = cycle[4]
 PC_email = 'pcpc@sef.am'
-PC_password = 'Password1'
+PC_password = 'Password2'
 
 
 def generate_random_arm_word(make_arm_word, n):
