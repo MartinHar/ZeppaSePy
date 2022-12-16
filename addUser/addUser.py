@@ -113,7 +113,6 @@ def start_webdriver():
 
 
 def user_verification():
-
     born_date_of_user = '01-01-1999'
     social_card_issue_date = '01-01-2019'
     passport_issue_date = '01-12-2020'
@@ -221,8 +220,8 @@ def user_verification():
 
 
 def main():
-    # add_user_from_swagger()
-    user_verification()
+    add_user_from_swagger()
+    # user_verification()
 
 
 if __name__ == '__main__':

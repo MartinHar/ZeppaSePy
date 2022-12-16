@@ -11,10 +11,13 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
-
-driver.implicitly_wait(10)
+def start():
+    global driver
+    # add options for not closing chrome automatically
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option("detach", True)
+    driver = webdriver.Chrome(options=options, service = ChromeService(ChromeDriverManager().install()))
+    driver.implicitly_wait(10)
 
 
 make_arm_word = 'աբգդեզէ'
@@ -40,14 +43,15 @@ def generate_random_number(make_rand_number, n):
 
 SUPM_email = 'supm@sef.am'
 SUPM_password = 'Password2'
-admin_role = 'ՎՄ'
-branch_code = 'E11'
+admin_role = 'ՄՃ'
+branch_code = '92'
 password = 'Password1'
 fixed_passport_start_date = '01-01-2020'
 fixed_passport_end_date = '01-01-2030'
 
 
 def add_admin():
+    start()
     driver.get("http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login")
     driver.maximize_window()
     login_email = driver.find_element(By.CSS_SELECTOR, '[name="email"]')
@@ -68,13 +72,13 @@ def add_admin():
 
     add_admin_btn = driver.find_element(By.XPATH, "//button[@class='ant-btn ant-btn-primary addNewAdmin']")
     add_admin_btn.click()
-    # admin = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
-    # admin.send_keys(admin_role, Keys.RETURN)
-    # branch = driver.find_element(By.XPATH, "(//input[@role='combobox'])[2]")
-    # branch.send_keys(branch_code, Keys.RETURN)
-    admin = driver.find_element(By.XPATH, "//form/div[1]/div[2]")
-    dropdown = Select(admin)
-    dropdown.select_by_visible_text('ՎՄ')
+    admin = driver.find_element(By.XPATH, "(//input[@role='combobox'])[1]")
+    admin.send_keys(admin_role, Keys.RETURN)
+    branch = driver.find_element(By.XPATH, "(//input[@role='combobox'])[2]")
+    branch.send_keys(branch_code, Keys.RETURN)
+    # admin = driver.find_element(By.XPATH, "//form/div[1]/div[2]")
+    # dropdown = Select(admin)
+    # dropdown.select_by_visible_text('ՎՄ')
     admin_code = driver.find_element(By.CSS_SELECTOR, "[name='adminCode']")
     admin_code.send_keys("AUT"+generate_random_eng_word(make_eng_word, 4))
     asUserCode = driver.find_element(By.CSS_SELECTOR, "[name='asUserCode']")

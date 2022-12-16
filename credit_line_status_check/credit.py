@@ -10,7 +10,7 @@ driver.implicitly_wait(2)
 
 url = 'http://ec2-34-240-105-163.eu-west-1.compute.amazonaws.com/login'
 admin_email = 'supm@sef.am'
-admin_password = 'Password2'
+admin_password = 12345
 
 driver.get(url)
 driver.maximize_window()

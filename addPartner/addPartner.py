@@ -1,5 +1,4 @@
 import time
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -33,10 +32,12 @@ def cycle_choice():
 
 def start():
     global driver
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    # add options for not closing chrome automatically
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option("detach", True)
+    driver = webdriver.Chrome(options=options, service = ChromeService(ChromeDriverManager().install()))
     driver.implicitly_wait(10)
-    print(driver.title)
-    print(driver.name)
+
 
 # def start():
 #     global driver
@@ -182,8 +183,7 @@ def add_potential_partner():
     address_apartment.send_keys(generate_random_number(2))
     save_btn = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     save_btn.click()
-    time.sleep(2)
-
+    time.sleep(5)
 
 
 def filtering_potential_partner():
@@ -202,19 +202,25 @@ def filtering_potential_partner():
     potentialPartners_tab.click()
     lastPartner = driver.find_element(By.XPATH, f"(//tr[@class='ant-table-row ant-table-row-level-0'])[{store_number}]")
     lastPartner.click()
-
     filterPartner = driver.find_element(By.CSS_SELECTOR, '[value="FILTER"]')
     filterPartner.click()
     comment_ = driver.find_element(By.CSS_SELECTOR, '[name="decisionFeedback"]')
     comment_.send_keys(comment)
-    uploadFile_1 = driver.find_element(By.XPATH, "(//input[@type='file'])[1]")
-    uploadFile_1.send_keys(jpg)
-    uploadFile_2 = driver.find_element(By.XPATH, "(//input[@type='file'])[2]")
-    uploadFile_2.send_keys(pdf)
-    uploadFile_3 = driver.find_element(By.XPATH, "(//input[@type='file'])[3]")
-    uploadFile_3.send_keys(png)
-    uploadFile_4 = driver.find_element(By.XPATH, "(//input[@type='file'])[4]")
-    uploadFile_4.send_keys(jpg)
+
+    # upload files
+    driver.find_element(By.XPATH, "//button[contains(text(),'Ընտրել ֆայլ')]").click()
+    time.sleep(0.5)
+    driver.find_element(By.XPATH, "//input[@value='COURT_PROCESS_EXISTENCE']").click()
+    time.sleep(0.5)
+    second_file_input = driver.find_element(By.XPATH, "//input[@type='file']")
+    second_file_input.send_keys(png)
+    time.sleep(1)
+    driver.find_element(By.XPATH, "//input[@value='E_REGISTER']").click()
+    first_file_input = driver.find_element(By.XPATH, "//input[@type='file']")
+    first_file_input.send_keys(jpg)
+    time.sleep(1)
+    driver.find_element(By.XPATH, "//span[@class='ant-modal-close-x']").click()
+    time.sleep(1)
     save_button = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     save_button.click()
     time.sleep(2)
@@ -320,6 +326,7 @@ def add_chain():
     sameCheckbox = driver.find_element(By.XPATH, "//input[@class='ant-checkbox-input']")
     sameCheckbox.click()
     driver.find_element(By.XPATH, "//input[@type='file']").send_keys(main_file)
+    # time.sleep(40000)
     # saveBTN = driver.find_element(By.CSS_SELECTOR, '[type="submit"]')
     # saveBTN.click()
 
